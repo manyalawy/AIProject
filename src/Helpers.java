@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Helpers {
@@ -26,4 +27,20 @@ public class Helpers {
         }
         return count;
     }
+
+    public static ArrayList returnEmptySlots(Object[][] grid) {
+        ArrayList slots = new ArrayList();
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                if (grid[i][j] == null) {
+                    int [] slot = new int [2] ;
+                    slot[0] = i;
+                    slot[1] = j;
+                    slots.add(slot);
+                }
+            }
+        }
+        return  slots;
+    }
+
 }

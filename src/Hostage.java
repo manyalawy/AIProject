@@ -1,13 +1,13 @@
 public class Hostage {
     int x;
     int y;
-    int health;
+    int damage;
     boolean carried;
 
-    public Hostage(int x, int y, int health) {
+    public Hostage(int x, int y, int damage) {
         this.x = x;
         this.y = y;
-        this.health = health;
+        this.damage = damage;
         carried = false;
 
     }
