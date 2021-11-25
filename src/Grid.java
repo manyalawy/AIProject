@@ -33,7 +33,7 @@ public class Grid {
             grid[tbX][tbY] = tb;
 
             // Create hostages
-            int numberOfHostages = Helpers.genRandomNumber(3, 7);
+            int numberOfHostages = Helpers.genRandomNumber(3, 10);
             hostages = new ArrayList<Hostage>();
             for (int i = 0; i < numberOfHostages; i++) {
                 int hostageX = Helpers.genRandomNumber(0, dimensions - 1);
@@ -108,29 +108,37 @@ public class Grid {
     public String genMatString(){
         String result = "";
         result = result + grid.length + "," + grid.length + ";";
+        result = result + neo.maxToCarry + ";";
         result = result + this.neo.x + "," + this.neo.y + ";";
         result = result + tb.x + "," + tb.y + ";";
 
         for (int i = 0; i < agents.size(); i++) {
+            if(i!=0)
+                result = result + ",";
             Agent agent = agents.get(i);
             result = result + agent.x + "," + agent.y;
         }
         result = result + ";";
 
         for (int i = 0; i < pills.size(); i++) {
+            if(i!=0)
+                result = result + ",";
             Pill pill = pills.get(i);
             result = result + pill.x + "," + pill.y;
         }
         result = result + ";";
-
         for (int i = 0; i < pads.size(); i++) {
+            if(i!=0)
+                result = result + ",";
             Pad pad = pads.get(i);
-            result = result + pad.x + "," + pad.y;
+            result = result + pad.x + "," + pad.y + ",";
             result = result + pad.goesToX + "," + pad.goesToY;
         }
-        result = result + ";";
 
+        result = result + ";";
         for (int i = 0; i < hostages.size(); i++) {
+            if(i!=0)
+                result = result + ",";
             Hostage hostage = hostages.get(i);
             result = result + hostage.x + "," + hostage.y + "," + hostage.damage;
         }
