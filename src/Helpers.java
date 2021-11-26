@@ -28,8 +28,8 @@ public class Helpers {
         return count;
     }
 
-    public static ArrayList returnEmptySlots(Object[][] grid) {
-        ArrayList slots = new ArrayList();
+    public static ArrayList<int[]> returnEmptySlots(Object[][] grid) {
+        ArrayList<int[]> slots = new ArrayList<>();
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid.length; j++) {
                 if (grid[i][j] == null) {

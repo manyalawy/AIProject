@@ -68,9 +68,9 @@ public class Grid {
             pads = new ArrayList<Pad>();
             if (numberOfPads % 2 != 0)
                 numberOfPads--;
-            ArrayList slots = Helpers.returnEmptySlots(grid);
+            ArrayList<int[]> slots = Helpers.returnEmptySlots(grid);
             Collections.shuffle(slots);
-            for (int i = 0; i < numberOfPads; i=i+2) {
+            for (int i = 0; i < numberOfPads/2; i=i+2) {
 
                 int [] slot1 = (int[]) slots.remove(0);
                 int [] slot2 = (int[]) slots.remove(0);
