@@ -46,10 +46,14 @@ public class Helpers {
     public static Grid stateToGrid(String state){
         Grid grid = new Grid(true);
         String [] states = state.split(";");
-
+        for(int i =0; i<states.length; i++){
+            System.out.println(states[i]);
+        }
         int dimensionsX = Integer.parseInt(states[0].split(",")[0]);
         int dimensionsY = Integer.parseInt(states[0].split(",")[1]);
         grid.grid = new Object[dimensionsX][dimensionsY];
+
+        //index out of bound we need to add health and numberofcarriedhostages
 
         int neoX = Integer.parseInt(states[2].split(",")[0]);
         int neoY = Integer.parseInt(states[2].split(",")[1]);
@@ -73,10 +77,37 @@ public class Helpers {
             grid.grid[agentX][agentY] = agent;
         }
 
+        String[] pills = states[5].split(",");
+        for (int i = 0; i < pills.length - 1; i=i+2) {
+            int pillX = Integer.parseInt(pills[i]);
+            int pillY = Integer.parseInt(pills[i+1]);
+            Pill pill = new Pill(pillX, pillX);
+            grid.pills.add(pill);
+            grid.grid[pillX][pillY] = pill;
+        }
 
-
-
-
+        String[] pads = states[6].split(",");
+        for (int i = 0; i < pads.length - 3; i=i+4) {
+            int padX = Integer.parseInt(pads[i]);
+            int padY = Integer.parseInt(pads[i+1]);
+            int goesToX = Integer.parseInt(pads[i+2]);
+            int goesToY = Integer.parseInt(pads[i+3]);
+            Pad pad = new Pad(padX, padY,goesToX,goesToY);
+            grid.pads.add(pad);
+            grid.grid[padX][padY] = pad;
+        }
+       
+        //we need to add carried to the state string after generating the map string
+        String[] hostages = states[7].split(",");
+        for (int i = 0; i < hostages.length-3; i=i+4) {
+            int hostageX = Integer.parseInt(hostages[i]);
+            int hostageY = Integer.parseInt(hostages[i+1]);
+            int damage = Integer.parseInt(hostages[i+2]);
+            boolean carried = Boolean.parseBoolean(hostages[i+3]);
+            Hostage hostage = new Hostage(hostageX, hostageY,damage,carried);
+            grid.hostages.add(hostage);
+            grid.grid[hostageX][hostageY] = hostage;
+        }
 
         return grid;
     }

@@ -5,11 +5,11 @@ public class Grid {
     Object[][] grid;
     Neo neo;
     TelelphoneBooth tb;
-    ArrayList<Hostage> hostages;
-    ArrayList<Pill> pills;
-    ArrayList<Hostage> deadHostage;
-    ArrayList<Agent> agents;
-    ArrayList<Pad> pads;
+    ArrayList<Hostage> hostages = new ArrayList<Hostage>();
+    ArrayList<Pill> pills = new ArrayList<Pill>();
+    ArrayList<Hostage> deadHostage = new ArrayList<Hostage>();
+    ArrayList<Agent> agents = new ArrayList<Agent>();
+    ArrayList<Pad> pads = new ArrayList<Pad>();
 
     int dimensions;
     int numberOfPills;
@@ -18,6 +18,7 @@ public class Grid {
     int numberOfAgents;
     //dimensions
     public Grid(boolean genManually) {
+
         if(genManually==false) {
             dimensions = Helpers.genRandomNumber(5, 15);
             grid = new Object[dimensions][dimensions];
@@ -49,7 +50,7 @@ public class Grid {
                     hostageY = Helpers.genRandomNumber(0, dimensions - 1);
                 }
                 int damage = Helpers.genRandomNumber(1, 99);
-                Hostage hostage = new Hostage(hostageX, hostageY, damage);
+                Hostage hostage = new Hostage(hostageX, hostageY, damage,false);
                 grid[hostageX][hostageY] = hostage;
                 hostages.add(hostage);
             }
