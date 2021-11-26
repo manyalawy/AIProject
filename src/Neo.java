@@ -14,4 +14,9 @@ public class Neo {
         this.numberOfCarriedHostages = 0;
     }
 
+    public void setNeoLocation(int x,int y){
+        this.x=x;
+        this.y=y;
+    }
+    
 }

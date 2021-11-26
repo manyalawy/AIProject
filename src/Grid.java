@@ -11,9 +11,15 @@ public class Grid {
     ArrayList<Agent> agents;
     ArrayList<Pad> pads;
 
+    int dimensions;
+    int numberOfPills;
+    int numberOfHostages;
+    int numberOfPads;
+    int numberOfAgents;
+    //dimensions
     public Grid(boolean genManually) {
         if(genManually==false) {
-            int dimensions = Helpers.genRandomNumber(5, 15);
+            dimensions = Helpers.genRandomNumber(5, 15);
             grid = new Object[dimensions][dimensions];
 
             // Create Neo
@@ -33,7 +39,7 @@ public class Grid {
             grid[tbX][tbY] = tb;
 
             // Create hostages
-            int numberOfHostages = Helpers.genRandomNumber(3, 10);
+            numberOfHostages = Helpers.genRandomNumber(3, 10);
             hostages = new ArrayList<Hostage>();
             for (int i = 0; i < numberOfHostages; i++) {
                 int hostageX = Helpers.genRandomNumber(0, dimensions - 1);
@@ -49,7 +55,7 @@ public class Grid {
             }
 
             // Create pills
-            int numberOfPills = Helpers.genRandomNumber(1, numberOfHostages);
+            numberOfPills = Helpers.genRandomNumber(1, numberOfHostages);
             pills = new ArrayList<Pill>();
             for (int i = 0; i < numberOfPills; i++) {
                 int pillX = Helpers.genRandomNumber(0, dimensions - 1);
@@ -64,7 +70,7 @@ public class Grid {
             }
 
             int emptySlots = Helpers.numOfLeftCells(grid);
-            int numberOfPads = Helpers.genRandomNumber(2, emptySlots);
+            numberOfPads = Helpers.genRandomNumber(2, emptySlots);
             pads = new ArrayList<Pad>();
             if (numberOfPads % 2 != 0)
                 numberOfPads--;
@@ -93,7 +99,7 @@ public class Grid {
             agents = new ArrayList<Agent>();
             slots = Helpers.returnEmptySlots(grid);
             Collections.shuffle(slots);
-            int numberOfAgents = Helpers.genRandomNumber(1, emptySlots);
+            numberOfAgents = Helpers.genRandomNumber(1, emptySlots);
             for (int i = 0; i < numberOfAgents; i++) {
                 int [] slot = (int[]) slots.remove(0);
                 int agentX = slot[0];
