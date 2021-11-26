@@ -14,6 +14,14 @@ public class Neo {
         this.numberOfCarriedHostages = 0;
     }
 
+    public Neo(int x, int y, int c, int health, int numberOfCarriedHostages) {
+        this.x = x;
+        this.y = y;
+        this.health = health;
+        this.maxToCarry = c;
+        this.numberOfCarriedHostages = numberOfCarriedHostages;
+    }
+
     public void setNeoLocation(int x,int y){
         this.x=x;
         this.y=y;
