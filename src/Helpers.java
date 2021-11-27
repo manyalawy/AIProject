@@ -113,7 +113,7 @@ public class Helpers {
 
         String [] states = state.split(";");
         String neoState = states[2];
-        neoState = neoState + ",100,0";
+        neoState = neoState + ",0,0";
         states[2] = neoState;
 
 
