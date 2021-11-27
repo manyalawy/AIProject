@@ -35,6 +35,6 @@ public class Actions {
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.TAKEPILL, state, node.depth + 1, 1);
 
-        return node;
+        return newNode;
     }
 }
