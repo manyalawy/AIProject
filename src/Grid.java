@@ -7,7 +7,6 @@ public class Grid {
     TelelphoneBooth tb;
     ArrayList<Hostage> hostages = new ArrayList<Hostage>();
     ArrayList<Pill> pills = new ArrayList<Pill>();
-    ArrayList<Hostage> deadHostage = new ArrayList<Hostage>();
     ArrayList<Agent> agents = new ArrayList<Agent>();
     ArrayList<Pad> pads = new ArrayList<Pad>();
 

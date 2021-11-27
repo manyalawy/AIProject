@@ -46,9 +46,6 @@ public class Helpers {
     public static Grid stateToGrid(String state){
         Grid grid = new Grid(true);
         String [] states = state.split(";");
-        for(int i =0; i<states.length; i++){
-            System.out.println(states[i]);
-        }
         int dimensionsX = Integer.parseInt(states[0].split(",")[0]);
         int dimensionsY = Integer.parseInt(states[0].split(",")[1]);
         grid.grid = new Object[dimensionsX][dimensionsY];
@@ -110,6 +107,67 @@ public class Helpers {
         }
 
         return grid;
+    }
+
+    public static String changeStateFormat(String state){
+
+        String [] states = state.split(";");
+        String neoState = states[2];
+        neoState = neoState + ",100,0";
+        states[2] = neoState;
+
+
+        String [] hostagesState = states[7].split(",");
+//      int newSize = (hostagesState.length/3) * 4;
+        String hostageNewState = "";
+        for (int i = 0; i < hostagesState.length-2; i=i+3) {
+            hostageNewState = hostageNewState + hostagesState[i] + "," + hostagesState[i+1] + "," + hostagesState[i+2] + "," +"false" + "," ;
+        }
+        hostageNewState = hostageNewState.substring(0,hostageNewState.length() - 1);
+        states[7] = hostageNewState;
+
+        return String.join(";",states);
+    }
+
+    public static String gridToState(Grid grid){
+        String result = "";
+        result = result + grid.grid.length + "," + grid.grid[0].length + ";";
+        result = result + grid.neo.maxToCarry + ";";
+        result = result + grid.neo.x + "," + grid.neo.y + "," + grid.neo.health + "," + grid.neo.numberOfCarriedHostages + ";";
+        result = result + grid.tb.x + "," + grid.tb.y + ";";
+
+        for (int i = 0; i < grid.agents.size(); i++) {
+            if(i!=0)
+                result = result + ",";
+            Agent agent = grid.agents.get(i);
+            result = result + agent.x + "," + agent.y;
+        }
+        result = result + ";";
+
+        for (int i = 0; i < grid.pills.size(); i++) {
+            if(i!=0)
+                result = result + ",";
+            Pill pill = grid.pills.get(i);
+            result = result + pill.x + "," + pill.y;
+        }
+        result = result + ";";
+        for (int i = 0; i < grid.pads.size(); i++) {
+            if(i!=0)
+                result = result + ",";
+            Pad pad = grid.pads.get(i);
+            result = result + pad.x + "," + pad.y + ",";
+            result = result + pad.goesToX + "," + pad.goesToY;
+        }
+
+        result = result + ";";
+        for (int i = 0; i < grid.hostages.size(); i++) {
+            if(i!=0)
+                result = result + ",";
+            Hostage hostage = grid.hostages.get(i);
+            result = result + hostage.x + "," + hostage.y + "," + hostage.damage + "," + hostage.carried;
+        }
+
+        return result;
     }
 
 }
