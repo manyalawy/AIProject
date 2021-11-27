@@ -10,7 +10,7 @@ public class ActionsHelpers {
     }
 
     public static boolean isNeoDead(Grid grid){
-        if(grid.neo.health<=0){
+        if(grid.neo.damage>=100){
             return true;
         }
         else{

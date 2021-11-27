@@ -133,7 +133,7 @@ public class Helpers {
         String result = "";
         result = result + grid.grid.length + "," + grid.grid[0].length + ";";
         result = result + grid.neo.maxToCarry + ";";
-        result = result + grid.neo.x + "," + grid.neo.y + "," + grid.neo.health + "," + grid.neo.numberOfCarriedHostages + ";";
+        result = result + grid.neo.x + "," + grid.neo.y + "," + grid.neo.damage + "," + grid.neo.numberOfCarriedHostages + ";";
         result = result + grid.tb.x + "," + grid.tb.y + ";";
 
         for (int i = 0; i < grid.agents.size(); i++) {
