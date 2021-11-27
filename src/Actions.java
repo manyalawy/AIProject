@@ -11,4 +11,9 @@ public class Actions {
        
         return node;
     }
+
+    public static Node takePill(Node node){
+        String state = node.state;
+         return node;
+    }
 }
