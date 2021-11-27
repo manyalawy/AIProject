@@ -14,6 +14,12 @@ public class Actions {
 
     public static Node takePill(Node node){
         String state = node.state;
-         return node;
+        Grid grid = Helpers.stateToGrid(state);
+        if(ActionsHelpers.isNeoDead(grid)==true)
+            return null;
+        if(grid.grid[grid.neo.x][grid.neo.y] instanceof Pill == false)
+            return null;
+        grid.neo.health = grid.neo.health + 20;
+        return node;
     }
 }
