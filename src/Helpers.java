@@ -59,7 +59,6 @@ public class Helpers {
         int health = Integer.parseInt(states[2].split(",")[2]);
         int numberOfCarriedHostages = Integer.parseInt(states[2].split(",")[3]);
         grid.neo = new Neo(neoX, neoY, maxToCarry, health , numberOfCarriedHostages);
-        grid.grid[neoX][neoY] = grid.neo;
 
         int tbX = Integer.parseInt(states[3].split(",")[0]);
         int tbY = Integer.parseInt(states[3].split(",")[1]);
