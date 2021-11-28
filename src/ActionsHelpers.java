@@ -4,28 +4,32 @@ public class ActionsHelpers {
         int neoY = grid.neo.y;
         if (operator == Operators.UP){
             for(int i =0; i<grid.agents.size(); i++){
-                if(grid.agents.get(i).x == neoX-1){
+                Agent a = grid.agents.get(i);
+                if(a.x == neoX-1 && a.y==neoY){
                     return true;
                 }
             }
         }
         if (operator == Operators.DOWN){
             for(int i =0; i<grid.agents.size(); i++){
-                if(grid.agents.get(i).x == neoX+1){
+                Agent a = grid.agents.get(i);
+                if(a.x == neoX+1 && a.y == neoY){
                     return true;
                 }
             }
         }
         if (operator == Operators.LEFT){
             for(int i =0; i<grid.agents.size(); i++){
-                if(grid.agents.get(i).y == neoY-1){
+                Agent a = grid.agents.get(i);
+                if(a.y == neoY+1 && a.x==neoX){
                     return true;
                 }
             }
         }
         if (operator == Operators.RIGHT){
             for(int i =0; i<grid.agents.size(); i++){
-                if(grid.agents.get(i).y == neoY+1){
+                Agent a = grid.agents.get(i);
+                if(a.y == neoY-1 && a.x==neoX){
                     return true;
                 }
             }
@@ -39,7 +43,7 @@ public class ActionsHelpers {
         if (operator == Operators.UP){
             for(int i =0; i<grid.hostages.size(); i++){
                 Hostage h = grid.hostages.get(i);
-                if(h.x == neoX-1 && h.damage>=100 && h.carried==false){
+                if(h.x == neoX-1 && h.y==neoY && h.damage>=100 && (h.carried==false || h.dropped==false)){
                     return true;
                 }
             }
@@ -47,7 +51,7 @@ public class ActionsHelpers {
         if (operator == Operators.DOWN){
             for(int i =0; i<grid.hostages.size(); i++){
                 Hostage h = grid.hostages.get(i);
-                if(h.x == neoX+1 && h.damage>=100 && h.carried==false){
+                if(h.x == neoX+1 && h.y==neoY && h.damage>=100 && (h.carried==false || h.dropped==false)){
                     return true;
                 }
             }
@@ -55,7 +59,7 @@ public class ActionsHelpers {
         if (operator == Operators.LEFT){
             for(int i =0; i<grid.hostages.size(); i++){
                 Hostage h = grid.hostages.get(i);
-                if(h.y == neoY-1 && h.damage>=100 && h.carried==false){
+                if(h.y == neoY+1 && h.x==neoX && h.damage>=100 && (h.carried==false || h.dropped==false)){
                     return true;
                 }
             }
@@ -63,7 +67,7 @@ public class ActionsHelpers {
         if (operator == Operators.RIGHT){
             for(int i =0; i<grid.hostages.size(); i++){
                 Hostage h = grid.hostages.get(i);
-                if(h.y == neoY+1 && h.damage>=100 && h.carried==false){
+                if(h.y == neoY-1 && h.x== neoX && h.damage>=100 && (h.carried==false || h.dropped==false)){
                     return true;
                 }
             }

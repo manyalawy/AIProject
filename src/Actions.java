@@ -13,7 +13,7 @@ public class Actions {
         if( ActionsHelpers.agentExists(grid,Operators.UP) || ActionsHelpers.mutantHostage(grid,Operators.UP) ){
             return null;
         }
-        neo.x += 1;
+        neo.x -= 1;
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.UP, state, node.depth + 1, 1);
 
@@ -33,7 +33,7 @@ public class Actions {
         if(ActionsHelpers.agentExists(grid,Operators.DOWN) || ActionsHelpers.mutantHostage(grid,Operators.DOWN) ){
             return null;
         }
-        neo.x -= 1;
+        neo.x += 1;
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.DOWN, state, node.depth + 1, 1);
 
@@ -72,7 +72,7 @@ public class Actions {
         if(ActionsHelpers.agentExists(grid,Operators.RIGHT) || ActionsHelpers.mutantHostage(grid,Operators.RIGHT)){
             return null;
         } 
-        neo.y -= 1;
+        neo.y += 1;
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.RIGHT, state, node.depth + 1, 1);
 
