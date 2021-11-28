@@ -90,17 +90,17 @@ public class ActionsHelpers {
     public static Grid timeStep(Grid grid) {
         for (int i = 0; i < grid.hostages.size(); i++) {
             grid.hostages.get(i).damage = grid.hostages.get(i).damage + 2;
-            if(grid.hostages.get(i).damage>100){
+            if (grid.hostages.get(i).damage > 100) {
                 grid.hostages.get(i).damage = 100;
             }
         }
         return grid;
     }
 
-    public static Grid removeAgent(Grid grid , int x, int y){
+    public static Grid removeAgent(Grid grid, int x, int y) {
 
         for (int i = 0; i < grid.agents.size(); i++) {
-            if(grid.agents.get(i).x == x && grid.agents.get(i).y == y) {
+            if (grid.agents.get(i).x == x && grid.agents.get(i).y == y) {
                 grid.agents.remove(i);
                 break;
             }
@@ -108,15 +108,35 @@ public class ActionsHelpers {
         return grid;
     }
 
-    public static Grid removeHostage(Grid grid , int x, int y){
+    public static Grid removeHostage(Grid grid, int x, int y) {
 
         for (int i = 0; i < grid.hostages.size(); i++) {
-            if(grid.hostages.get(i).x == x && grid.hostages.get(i).y == y) {
+            if (grid.hostages.get(i).x == x && grid.hostages.get(i).y == y) {
                 grid.hostages.remove(i);
                 break;
             }
         }
         return grid;
+    }
+
+    public static boolean reachedTestGoal(Grid grid) {
+        return areHostagesDropped(grid) && isNeoAlive(grid) && isNeoAtTB(grid) && isHostagesArrayEmpty(grid);
+    }
+
+    public static boolean areHostagesDropped(Grid grid) {
+        return grid.neo.numberOfCarriedHostages <= 0;
+    }
+
+    public static boolean isNeoAlive(Grid grid) {
+        return grid.neo.damage < 100;
+    }
+
+    public static boolean isNeoAtTB(Grid grid) {
+        return grid.neo.x == grid.tb.x && grid.tb.y == grid.neo.y;
+    }
+
+    public static boolean isHostagesArrayEmpty(Grid grid) {
+        return grid.hostages.size() == 0;
     }
 
 }
