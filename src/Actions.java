@@ -120,4 +120,62 @@ public class Actions {
         return newNode;
     }
 
+    public static Node carry(Node node) {
+        String state = node.state;
+        Grid grid = Helpers.stateToGrid(state);
+
+        if (ActionsHelpers.isNeoDead(grid) == true)
+            return null;
+
+        if (grid.neo.numberOfCarriedHostages >= grid.neo.maxToCarry)
+            return null;
+
+        if (grid.grid[grid.neo.x][grid.neo.y] instanceof Hostage == false )
+            return null;
+            
+        Hostage hostage = (Hostage) grid.grid[grid.neo.x][grid.neo.y];      //
+        if (hostage.carried)                                                // Hostage is already carried
+            return null;
+
+        for (int i = 0; i < grid.hostages.size(); i++) {
+            if (grid.hostages.get(i) == hostage) {
+                grid.hostages.get(i).carried = true;
+                break;
+            }
+        }
+        grid.neo.numberOfCarriedHostages += 1;
+        
+
+        ActionsHelpers.timeStep(grid);
+
+        state = Helpers.gridToState(grid);
+        Node newNode = new Node(node, Operators.CARRY, state, node.depth + 1, 1);
+        return newNode;
+    }
+
+    public static Node drop(Node node) {
+     
+        String state = node.state;
+        Grid grid = Helpers.stateToGrid(state);
+
+        if (ActionsHelpers.isNeoDead(grid) == true)
+            return null;
+
+        if (grid.grid[grid.neo.x][grid.neo.y] instanceof TelelphoneBooth == false)
+            return null;
+        
+
+        for (int i = 0; i < grid.hostages.size(); i++) {
+            if (grid.hostages.get(i).carried) {
+                grid.hostages.get(i).dropped = true;    // Set dropped to TRUE
+                grid.hostages.remove(i);
+            }
+        }
+        grid.neo.numberOfCarriedHostages = 0;
+   
+        ActionsHelpers.timeStep(grid);
+        state = Helpers.gridToState(grid);
+        Node newNode = new Node(node, Operators.DROP, state, node.depth + 1, 1);
+        return newNode;
+    }
 }
