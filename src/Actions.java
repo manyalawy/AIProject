@@ -1,17 +1,19 @@
+import javax.swing.*;
+
 public class Actions {
 
 
-    public static Node Up(Node node){
+    public static Node Up(Node node) {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
-        
+
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
-        if (neo.x<=0){
+        if (neo.x <= 0) {
             return null;
         }
-        if( ActionsHelpers.agentExists(grid,Operators.UP) || ActionsHelpers.mutantHostage(grid,Operators.UP) ){
+        if (ActionsHelpers.agentExists(grid, Operators.UP) || ActionsHelpers.mutantHostage(grid, Operators.UP)) {
             return null;
         }
         neo.x -= 1;
@@ -21,18 +23,18 @@ public class Actions {
 
         return newNode;
     }
-    
-    public static Node Down(Node node){
+
+    public static Node Down(Node node) {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
-        
+
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
-        if (neo.x>=grid.dimensions-1){
+        if (neo.x >= grid.dimensions - 1) {
             return null;
         }
-        if(ActionsHelpers.agentExists(grid,Operators.DOWN) || ActionsHelpers.mutantHostage(grid,Operators.DOWN) ){
+        if (ActionsHelpers.agentExists(grid, Operators.DOWN) || ActionsHelpers.mutantHostage(grid, Operators.DOWN)) {
             return null;
         }
         neo.x += 1;
@@ -43,17 +45,17 @@ public class Actions {
         return newNode;
     }
 
-    public static Node Left(Node node){
+    public static Node Left(Node node) {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
-        
+
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
-        if (neo.y<=0){
+        if (neo.y <= 0) {
             return null;
         }
-        if ( ActionsHelpers.agentExists(grid,Operators.LEFT) || ActionsHelpers.mutantHostage(grid,Operators.LEFT) ){
+        if (ActionsHelpers.agentExists(grid, Operators.LEFT) || ActionsHelpers.mutantHostage(grid, Operators.LEFT)) {
             return null;
         }
         neo.y -= 1;
@@ -63,19 +65,20 @@ public class Actions {
 
         return newNode;
     }
-    public static Node Right(Node node){
+
+    public static Node Right(Node node) {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
-        
+
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
-        if (neo.y>=grid.dimensions-1){
+        if (neo.y >= grid.dimensions - 1) {
             return null;
         }
-        if(ActionsHelpers.agentExists(grid,Operators.RIGHT) || ActionsHelpers.mutantHostage(grid,Operators.RIGHT)){
+        if (ActionsHelpers.agentExists(grid, Operators.RIGHT) || ActionsHelpers.mutantHostage(grid, Operators.RIGHT)) {
             return null;
-        } 
+        }
         neo.y += 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
@@ -107,7 +110,7 @@ public class Actions {
         for (int i = 0; i < grid.pills.size(); i++) {
             Pill pill = grid.pills.get(i);
             Neo neo = grid.neo;
-            if(pill.x == neo.x && pill.y == neo.y){
+            if (pill.x == neo.x && pill.y == neo.y) {
                 grid.pills.remove(i);
                 break;
             }
@@ -118,6 +121,102 @@ public class Actions {
         Node newNode = new Node(node, Operators.TAKEPILL, state, node.depth + 1, 1);
 
         return newNode;
+    }
+
+    public static Node kill(Node n) {
+
+        String state = n.state;
+        Grid grid = Helpers.stateToGrid(state);
+        if (ActionsHelpers.isNeoDead(grid)) {
+            return null;
+        }
+
+        boolean didNeoKill = false;
+
+        int neoX = grid.neo.x;
+        int neoY = grid.neo.y;
+
+        //check north
+        if (neoX > 0) {
+            if (grid.grid[neoX - 1][neoY] != null) {
+                if (grid.grid[neoX - 1][neoY] instanceof Agent) {
+                    grid = ActionsHelpers.removeAgent(grid, neoX - 1, neoY);
+                    didNeoKill = true;
+                }
+
+                if (grid.grid[neoX - 1][neoY] instanceof Hostage) {
+                    Hostage hostage = (Hostage) grid.grid[neoX - 1][neoY];
+                    if (hostage.damage >= 100 && hostage.carried == false && hostage.dropped == false) {
+                        grid = ActionsHelpers.removeHostage(grid, neoX - 1, neoY);
+                        didNeoKill = true;
+                    }
+                }
+            }
+        }
+
+        //check south
+        if (neoX < grid.dimensions - 1) {
+            if (grid.grid[neoX + 1][neoY] != null) {
+                if (grid.grid[neoX + 1][neoY] instanceof Agent) {
+                    grid = ActionsHelpers.removeAgent(grid, neoX + 1, neoY);
+                    didNeoKill = true;
+                }
+
+                if (grid.grid[neoX + 1][neoY] instanceof Hostage) {
+                    Hostage hostage = (Hostage) grid.grid[neoX + 1][neoY];
+                    if (hostage.damage >= 100 && hostage.carried == false && hostage.dropped == false) {
+                        grid = ActionsHelpers.removeHostage(grid, neoX + 1, neoY);
+                        didNeoKill = true;
+                    }
+                }
+            }
+        }
+
+        //check east
+        if (neoY < grid.dimensions - 1) {
+            if (grid.grid[neoX][neoY + 1] != null) {
+                if (grid.grid[neoX][neoY + 1] instanceof Agent) {
+                    grid = ActionsHelpers.removeAgent(grid, neoX, neoY + 1);
+                    didNeoKill = true;
+                }
+
+                if (grid.grid[neoX][neoY + 1] instanceof Hostage) {
+                    Hostage hostage = (Hostage) grid.grid[neoX][neoY + 1];
+                    if (hostage.damage >= 100 && hostage.carried == false && hostage.dropped == false) {
+                        grid = ActionsHelpers.removeHostage(grid, neoX, neoY + 1);
+                        didNeoKill = true;
+                    }
+                }
+            }
+        }
+
+        //check west
+        if (neoY > 0) {
+            if (grid.grid[neoX][neoY - 1] != null) {
+                if (grid.grid[neoX][neoY - 1] instanceof Agent) {
+                    grid = ActionsHelpers.removeAgent(grid, neoX, neoY - 1);
+                    didNeoKill = true;
+                }
+
+                if (grid.grid[neoX - 1][neoY] instanceof Hostage) {
+                    Hostage hostage = (Hostage) grid.grid[neoX - 1][neoY];
+                    if (hostage.damage >= 100 && hostage.carried == false && hostage.dropped == false) {
+                        grid = ActionsHelpers.removeHostage(grid, neoX, neoY - 1);
+                        didNeoKill = true;
+                    }
+                }
+            }
+        }
+
+
+
+        if (didNeoKill == true) {
+            grid.neo.damage = grid.neo.damage+20;
+            state = Helpers.gridToState(grid);
+            return new Node(n, Operators.KILL, state, n.depth + 1, 1);
+        } else {
+            return null;
+        }
     }
 
 }
