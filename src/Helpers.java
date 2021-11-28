@@ -78,7 +78,7 @@ public class Helpers {
         for (int i = 0; i < pills.length - 1; i=i+2) {
             int pillX = Integer.parseInt(pills[i]);
             int pillY = Integer.parseInt(pills[i+1]);
-            Pill pill = new Pill(pillX, pillX);
+            Pill pill = new Pill(pillX, pillY);
             grid.pills.add(pill);
             grid.grid[pillX][pillY] = pill;
         }

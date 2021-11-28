@@ -31,8 +31,17 @@ public class Actions {
                 }
             }
         }
+        for (int i = 0; i < grid.pills.size(); i++) {
+            Pill pill = grid.pills.get(i);
+            Neo neo = grid.neo;
+            if(pill.x == neo.x && pill.y == neo.y){
+                grid.pills.remove(i);
+                break;
+            }
+        }
 
         state = Helpers.gridToState(grid);
+        System.out.println(state);
         Node newNode = new Node(node, Operators.TAKEPILL, state, node.depth + 1, 1);
 
         return newNode;
