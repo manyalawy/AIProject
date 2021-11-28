@@ -17,6 +17,7 @@ public class Matrix {
         //Add something to reformat state according to our state definetion
         
         //booleans added manually we need to add carried for hostages in state string
+
 //        Grid grid = Helpers.stateToGrid("5,5;2;4,3;2,1;2,0,0,4,0,3,0,1;3,1,3,2;4,4,3,3,3,3,4,4;4,0,17,true,1,2,54,true,0,0,46,true,4,1,22,false");
         long start = System.currentTimeMillis();
         String state = Helpers.changeStateFormat("5,5;2;3,4;2,1;2,0,0,4,0,3,0,1;3,1,3,2;4,4,3,3,3,3,4,4;4,0,17");

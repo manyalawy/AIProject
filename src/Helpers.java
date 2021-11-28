@@ -49,6 +49,7 @@ public class Helpers {
         int dimensionsX = Integer.parseInt(states[0].split(",")[0]);
         int dimensionsY = Integer.parseInt(states[0].split(",")[1]);
         grid.grid = new Object[dimensionsX][dimensionsY];
+        grid.dimensions=dimensionsY;
 
         //index out of bound we need to add health and numberofcarriedhostages
 
@@ -58,7 +59,6 @@ public class Helpers {
         int health = Integer.parseInt(states[2].split(",")[2]);
         int numberOfCarriedHostages = Integer.parseInt(states[2].split(",")[3]);
         grid.neo = new Neo(neoX, neoY, maxToCarry, health , numberOfCarriedHostages);
-        grid.grid[neoX][neoY] = grid.neo;
 
         int tbX = Integer.parseInt(states[3].split(",")[0]);
         int tbY = Integer.parseInt(states[3].split(",")[1]);
@@ -96,12 +96,13 @@ public class Helpers {
        
         //we need to add carried to the state string after generating the map string
         String[] hostages = states[7].split(",");
-        for (int i = 0; i < hostages.length-3; i=i+4) {
+        for (int i = 0; i < hostages.length-4; i=i+5) {
             int hostageX = Integer.parseInt(hostages[i]);
             int hostageY = Integer.parseInt(hostages[i+1]);
             int damage = Integer.parseInt(hostages[i+2]);
             boolean carried = Boolean.parseBoolean(hostages[i+3]);
-            Hostage hostage = new Hostage(hostageX, hostageY,damage,carried);
+            boolean dropped = Boolean.parseBoolean(hostages[i+4]);
+            Hostage hostage = new Hostage(hostageX, hostageY,damage,carried,dropped);
             grid.hostages.add(hostage);
             grid.grid[hostageX][hostageY] = hostage;
         }
@@ -121,7 +122,7 @@ public class Helpers {
 //      int newSize = (hostagesState.length/3) * 4;
         String hostageNewState = "";
         for (int i = 0; i < hostagesState.length-2; i=i+3) {
-            hostageNewState = hostageNewState + hostagesState[i] + "," + hostagesState[i+1] + "," + hostagesState[i+2] + "," +"false" + "," ;
+            hostageNewState = hostageNewState + hostagesState[i] + "," + hostagesState[i+1] + "," + hostagesState[i+2] + "," +"false" + "," + "false"+",";
         }
         hostageNewState = hostageNewState.substring(0,hostageNewState.length() - 1);
         states[7] = hostageNewState;
@@ -164,7 +165,7 @@ public class Helpers {
             if(i!=0)
                 result = result + ",";
             Hostage hostage = grid.hostages.get(i);
-            result = result + hostage.x + "," + hostage.y + "," + hostage.damage + "," + hostage.carried;
+            result = result + hostage.x + "," + hostage.y + "," + hostage.damage + "," + hostage.carried + ","+ hostage.dropped;
         }
 
         return result;
