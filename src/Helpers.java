@@ -45,7 +45,7 @@ public class Helpers {
 
     public static Grid stateToGrid(String state){
         Grid grid = new Grid(true);
-        String [] states = state.split(";");
+        String [] states = state.split(";", -1);
         int dimensionsX = Integer.parseInt(states[0].split(",")[0]);
         int dimensionsY = Integer.parseInt(states[0].split(",")[1]);
         grid.grid = new Object[dimensionsX][dimensionsY];
