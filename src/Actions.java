@@ -115,7 +115,7 @@ public class Actions {
                 break;
             }
         }
-
+        grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         System.out.println(state);
         Node newNode = new Node(node, Operators.TAKEPILL, state, node.depth + 1, 1);
@@ -212,6 +212,7 @@ public class Actions {
 
         if (didNeoKill == true) {
             grid.neo.damage = grid.neo.damage+20;
+            grid = ActionsHelpers.timeStep(grid);
             state = Helpers.gridToState(grid);
             return new Node(n, Operators.KILL, state, n.depth + 1, 1);
         } else {
