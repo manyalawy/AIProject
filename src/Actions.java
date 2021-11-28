@@ -14,6 +14,7 @@ public class Actions {
             return null;
         }
         neo.x -= 1;
+        grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.UP, state, node.depth + 1, 1);
 
@@ -34,6 +35,7 @@ public class Actions {
             return null;
         }
         neo.x += 1;
+        grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.DOWN, state, node.depth + 1, 1);
 
@@ -54,6 +56,7 @@ public class Actions {
             return null;
         }
         neo.y -= 1;
+        grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.LEFT, state, node.depth + 1, 1);
 
@@ -73,6 +76,7 @@ public class Actions {
             return null;
         } 
         neo.y += 1;
+        grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.RIGHT, state, node.depth + 1, 1);
 
