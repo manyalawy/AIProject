@@ -4,7 +4,7 @@ import java.util.*;
 public class Node{
     Node parent;
     Operators operator;
-    String state; //should not contain TelelphoneBooth and Pads (static attributes) and dimensions
+    String state; 
     int depth;
     int pathCost;
     

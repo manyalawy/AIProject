@@ -49,6 +49,7 @@ public class Helpers {
         int dimensionsX = Integer.parseInt(states[0].split(",")[0]);
         int dimensionsY = Integer.parseInt(states[0].split(",")[1]);
         grid.grid = new Object[dimensionsX][dimensionsY];
+        grid.dimensions=dimensionsY;
 
         //index out of bound we need to add health and numberofcarriedhostages
 
