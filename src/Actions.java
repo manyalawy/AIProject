@@ -87,7 +87,6 @@ public class Actions {
         return newNode;
     }
 
-
     public static Node takePill(Node node) {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
@@ -208,9 +207,8 @@ public class Actions {
         }
 
 
-
         if (didNeoKill == true) {
-            grid.neo.damage = grid.neo.damage+20;
+            grid.neo.damage = grid.neo.damage + 20;
             grid = ActionsHelpers.timeStep(grid);
             state = Helpers.gridToState(grid);
             return new Node(n, Operators.KILL, state, n.depth + 1, 1);
@@ -229,9 +227,9 @@ public class Actions {
         if (grid.neo.numberOfCarriedHostages >= grid.neo.maxToCarry)
             return null;
 
-        if (grid.grid[grid.neo.x][grid.neo.y] instanceof Hostage == false )
+        if (grid.grid[grid.neo.x][grid.neo.y] instanceof Hostage == false)
             return null;
-            
+
         Hostage hostage = (Hostage) grid.grid[grid.neo.x][grid.neo.y];      //
         if (hostage.carried)                                                // Hostage is already carried
             return null;
@@ -243,7 +241,7 @@ public class Actions {
             }
         }
         grid.neo.numberOfCarriedHostages += 1;
-        
+
 
         ActionsHelpers.timeStep(grid);
 
@@ -253,7 +251,7 @@ public class Actions {
     }
 
     public static Node drop(Node node) {
-     
+
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
 
@@ -262,7 +260,9 @@ public class Actions {
 
         if (grid.grid[grid.neo.x][grid.neo.y] instanceof TelelphoneBooth == false)
             return null;
-        
+
+        if (grid.neo.numberOfCarriedHostages <= 0)
+            return null;
 
         for (int i = 0; i < grid.hostages.size(); i++) {
             if (grid.hostages.get(i).carried) {
@@ -271,14 +271,14 @@ public class Actions {
             }
         }
         grid.neo.numberOfCarriedHostages = 0;
-   
+
         ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.DROP, state, node.depth + 1, 1);
 
         return newNode;
     }
-    
+
     public static Node fly(Node node) {
 
         String state = node.state;
@@ -291,7 +291,7 @@ public class Actions {
         if (grid.grid[grid.neo.x][grid.neo.y] instanceof Pad == false)
             return null;
 
-        if(node.operator == Operators.FLY)
+        if (node.operator == Operators.FLY)
             return null;
 
         Pad pad = (Pad) grid.grid[grid.neo.x][grid.neo.y];
