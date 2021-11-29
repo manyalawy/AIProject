@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class ActionsHelpers {
     public static boolean agentExists(Grid grid, Operators operator) {

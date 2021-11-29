@@ -1,5 +1,3 @@
-import javax.swing.*;
-
 public class Actions {
 
 
@@ -8,8 +6,12 @@ public class Actions {
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
 
-        if (ActionsHelpers.isNeoDead(grid) == true)
+        if (node.operator==Operators.DOWN) {
             return null;
+        }
+        if (ActionsHelpers.isNeoDead(grid) == true){
+            return null;
+        }
         if (neo.x <= 0) {
             return null;
         }
@@ -29,6 +31,9 @@ public class Actions {
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
 
+        if(node.operator==Operators.UP) {
+            return null;
+        }
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
         if (neo.x >= grid.dimensions - 1) {
@@ -50,6 +55,9 @@ public class Actions {
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
 
+        if(node.operator==Operators.RIGHT){
+            return null;
+        }
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
         if (neo.y <= 0) {
@@ -71,6 +79,9 @@ public class Actions {
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
 
+        if(node.operator==Operators.LEFT) {
+            return null;
+        }
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
         if (neo.y >= grid.dimensions - 1) {
