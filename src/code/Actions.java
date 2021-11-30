@@ -164,7 +164,7 @@ public class Actions {
                 if (grid.grid[neoX - 1][neoY] instanceof Agent) {
                     grid = ActionsHelpers.removeAgent(grid, neoX - 1, neoY);
                     didNeoKill = true;
-                    
+                    grid.kills++;
                 }
 
                 if (grid.grid[neoX - 1][neoY] instanceof Hostage) {
@@ -183,6 +183,7 @@ public class Actions {
                 if (grid.grid[neoX + 1][neoY] instanceof Agent) {
                     grid = ActionsHelpers.removeAgent(grid, neoX + 1, neoY);
                     didNeoKill = true;
+                    grid.kills++;
                 }
 
                 if (grid.grid[neoX + 1][neoY] instanceof Hostage) {
@@ -201,6 +202,7 @@ public class Actions {
                 if (grid.grid[neoX][neoY + 1] instanceof Agent) {
                     grid = ActionsHelpers.removeAgent(grid, neoX, neoY + 1);
                     didNeoKill = true;
+                    grid.kills++;
                 }
 
                 if (grid.grid[neoX][neoY + 1] instanceof Hostage) {
@@ -219,6 +221,7 @@ public class Actions {
                 if (grid.grid[neoX][neoY - 1] instanceof Agent) {
                     grid = ActionsHelpers.removeAgent(grid, neoX, neoY - 1);
                     didNeoKill = true;
+                    grid.kills++;
                 }
 
                 if (grid.grid[neoX][neoY - 1] instanceof Hostage) {
