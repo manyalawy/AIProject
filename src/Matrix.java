@@ -18,7 +18,7 @@ public class Matrix extends Search {
         //  String initialState = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
         // Node parent = new Node(null,null,initialState,0,0);
         Matrix m = new Matrix();
-        String rootState = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
+        String rootState = grid;
         Node root = new Node(null, null, rootState, 0, 0);
         
         Node result = m.search(strategy, root);
