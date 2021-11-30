@@ -1,3 +1,4 @@
+package code;
 
 public class ActionsHelpers {
     public static boolean agentExists(Grid grid, Operators operator) {
@@ -61,7 +62,7 @@ public class ActionsHelpers {
         if (operator == Operators.left) {
             for (int i = 0; i < grid.hostages.size(); i++) {
                 Hostage h = grid.hostages.get(i);
-                if (h.y == neoY + 1 && h.x == neoX && h.damage >= 100 && h.carried == false && h.dropped == false) {
+                if (h.y == neoY - 1 && h.x == neoX && h.damage >= 100 && h.carried == false && h.dropped == false) {
                     return true;
                 }
             }
@@ -69,7 +70,7 @@ public class ActionsHelpers {
         if (operator == Operators.right) {
             for (int i = 0; i < grid.hostages.size(); i++) {
                 Hostage h = grid.hostages.get(i);
-                if (h.y == neoY - 1 && h.x == neoX && h.damage >= 100 && h.carried == false && h.dropped == false) {
+                if (h.y == neoY + 1 && h.x == neoX && h.damage >= 100 && h.carried == false && h.dropped == false) {
                     return true;
                 }
             }
