@@ -164,6 +164,7 @@ public class Actions {
                 if (grid.grid[neoX - 1][neoY] instanceof Agent) {
                     grid = ActionsHelpers.removeAgent(grid, neoX - 1, neoY);
                     didNeoKill = true;
+                    
                 }
 
                 if (grid.grid[neoX - 1][neoY] instanceof Hostage) {

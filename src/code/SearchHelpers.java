@@ -20,6 +20,7 @@ public class SearchHelpers {
             node = node.parent;
         }
 
+        
         return pathString + ";" + grid.deaths + ";"+  kills + ";" + Matrix.nodesExpandedCount; //+ numberOfNodes;
     }
     

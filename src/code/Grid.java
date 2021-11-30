@@ -12,7 +12,7 @@ public class Grid {
     ArrayList<Pad> pads = new ArrayList<Pad>();
 
     int deaths;
-
+   
     int dimensions;
     int numberOfPills;
     int numberOfHostages;
