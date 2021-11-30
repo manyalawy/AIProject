@@ -1,4 +1,4 @@
-import java.util.HashSet;
+package code;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class Matrix extends Search {
     static Grid grid;
-    public HashSet<String> repeatedStates = new HashSet<String>();
+    // public HashSet<String> stateSpace = new HashSet<String>();
     static int nodesExpandedCount = 0;
     
 
@@ -48,10 +48,10 @@ public class Matrix extends Search {
 
     public boolean repeatedState(String state){
         //should remove damage of hostages from string state
-        if (repeatedStates.contains(state)) {
+        if (stateSpace.contains(state)) {
             return true;
         } else {
-            repeatedStates.add(state);
+            stateSpace.add(state);
             return false;
         }
     }
@@ -79,7 +79,8 @@ public class Matrix extends Search {
             }
 
             Node front = bfQueue.remove();
-            nodesExpandedCount++;       
+            nodesExpandedCount++;     
+            System.out.print(front.operator + ", ");  
 
             Grid grid = Helpers.stateToGrid(front.state);
             if (ActionsHelpers.reachedTestGoal(grid)==true){
@@ -186,20 +187,10 @@ public class Matrix extends Search {
     }
     
         
-        
-        
-    
-
     @Override
     public boolean goalTest() {
         // TODO Auto-generated method stub
         return false;
-    }
-
-    @Override
-    public String stateSpace() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override

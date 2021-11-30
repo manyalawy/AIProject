@@ -1,3 +1,4 @@
+package code;
 public enum Operators {
     up,
     down,
