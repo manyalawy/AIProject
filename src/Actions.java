@@ -98,10 +98,11 @@ public class Actions {
         return newNode;
     }
 
-
     public static Node takePill(Node node) {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
+        if(node.operator==Operators.TAKEPILL)
+            return null;
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
         if (grid.grid[grid.neo.x][grid.neo.y] instanceof Pill == false)
@@ -137,6 +138,9 @@ public class Actions {
 
         String state = n.state;
         Grid grid = Helpers.stateToGrid(state);
+        if(n.operator == Operators.KILL){
+            return null;
+        }
         if (ActionsHelpers.isNeoDead(grid)) {
             return null;
         }
@@ -233,7 +237,9 @@ public class Actions {
     public static Node carry(Node node) {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
-
+        if(node.operator == Operators.CARRY){
+            return null;
+        }
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
 
@@ -267,7 +273,9 @@ public class Actions {
      
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
-
+        if(node.operator==Operators.DROP){
+            return null;
+        }
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
 
@@ -295,6 +303,9 @@ public class Actions {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
+        if(node.operator==Operators.FLY){
+            return null;
+        }
 
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;

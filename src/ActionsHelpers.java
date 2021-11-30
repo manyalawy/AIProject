@@ -91,6 +91,10 @@ public class ActionsHelpers {
             grid.hostages.get(i).damage = grid.hostages.get(i).damage + 2;
             if (grid.hostages.get(i).damage > 100) {
                 grid.hostages.get(i).damage = 100;
+                if(grid.hostages.get(i).carried==false && grid.hostages.get(i).dropped==false && grid.hostages.get(i).dead==false){
+                    grid.deaths++;
+                    grid.hostages.get(i).dead=true;
+                }
             }
         }
         return grid;
