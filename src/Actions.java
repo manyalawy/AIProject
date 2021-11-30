@@ -128,7 +128,7 @@ public class Actions {
             }
         }
         state = Helpers.gridToState(grid);
-        System.out.println(state);
+     //   System.out.println(state);
         Node newNode = new Node(node, Operators.TAKEPILL, state, node.depth + 1, 1);
 
         return newNode;
@@ -212,8 +212,8 @@ public class Actions {
                     didNeoKill = true;
                 }
 
-                if (grid.grid[neoX - 1][neoY] instanceof Hostage) {
-                    Hostage hostage = (Hostage) grid.grid[neoX - 1][neoY];
+                if (grid.grid[neoX][neoY - 1] instanceof Hostage) {
+                    Hostage hostage = (Hostage) grid.grid[neoX][neoY - 1];
                     if (hostage.damage >= 100 && hostage.carried == false && hostage.dropped == false) {
                         grid = ActionsHelpers.removeHostage(grid, neoX, neoY - 1);
                         didNeoKill = true;
@@ -323,7 +323,7 @@ public class Actions {
 
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        System.out.println(state);
+        //System.out.println(state);
         Node newNode = new Node(node, Operators.FLY, state, node.depth + 1, 1);
 
         return newNode;

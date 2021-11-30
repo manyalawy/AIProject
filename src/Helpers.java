@@ -102,7 +102,7 @@ public class Helpers {
             int damage = Integer.parseInt(hostages[i+2]);
             boolean carried = Boolean.parseBoolean(hostages[i+3]);
             boolean dropped = Boolean.parseBoolean(hostages[i+4]);
-            Hostage hostage = new Hostage(hostageX, hostageY,damage,carried,dropped);
+            Hostage hostage = new Hostage(hostageX, hostageY,damage,carried,dropped,false);
             grid.hostages.add(hostage);
             grid.grid[hostageX][hostageY] = hostage;
         }
