@@ -142,4 +142,11 @@ public class ActionsHelpers {
         return grid.hostages.size() == 0;
     }
 
+    public static String removeHostagesFromString(String state){
+        String [] states = state.split(";", -1);
+        states [7] = null;
+        state = String.join(";", states);
+        return  state;
+    }
+
 }
