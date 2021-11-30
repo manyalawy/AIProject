@@ -12,7 +12,7 @@ public class Matrix extends Search {
         String grid1 = Helpers.changeStateFormat("5,5;1;1,4;1,0;0,4;0,0,2,2;3,4,4,2,4,2,3,4;0,2,32,0,1,38");
         String grid2 = Helpers.changeStateFormat("5,5;2;3,2;0,1;4,1;0,3;1,2,4,2,4,2,1,2,0,4,3,0,3,0,0,4;1,1,77,3,4,34");
 
-        return grid2;
+        return grid0;
         
         // return grid.genMatString();
     }
@@ -27,7 +27,8 @@ public class Matrix extends Search {
         
         Node result = m.search(strategy, root);
         String path = SearchHelpers.getPath(result);
-        System.out.println(path);
+        
+        System.out.println("\n" + "\n" + path);
         // String result = Search.search(strategy,parent);
         //left,fly,right,carry,left,fly,down,right,drop,left,left,kill,left,left,up,carry,down,down,kill,up,right,right,right,right,drop;1;3;1246837 (plan,deaths,kills,nodes)
     }
@@ -140,7 +141,7 @@ public class Matrix extends Search {
     public static void main(String[] args) {
 
         solve(gridGen(), "BF", false);
-    
+
     }
 
 

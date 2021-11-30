@@ -23,6 +23,8 @@ public class Actions {
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.UP, state, node.depth + 1, 1);
 
+        System.out.print("UP, ");
+
         return newNode;
     }
 
@@ -47,6 +49,7 @@ public class Actions {
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.DOWN, state, node.depth + 1, 1);
 
+        System.out.print("DOWN, ");
         return newNode;
     }
 
@@ -71,6 +74,8 @@ public class Actions {
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.LEFT, state, node.depth + 1, 1);
 
+        System.out.print("LEFT, ");
+
         return newNode;
     }
 
@@ -94,6 +99,8 @@ public class Actions {
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.RIGHT, state, node.depth + 1, 1);
+
+        System.out.print("RIGHT, ");
 
         return newNode;
     }
@@ -131,6 +138,8 @@ public class Actions {
         state = Helpers.gridToState(grid);
      //   System.out.println(state);
         Node newNode = new Node(node, Operators.TAKEPILL, state, node.depth + 1, 1);
+
+        System.out.print("PILL, ");
 
         return newNode;
     }
@@ -228,10 +237,15 @@ public class Actions {
             grid.neo.damage = grid.neo.damage + 20;
             grid = ActionsHelpers.timeStep(grid);
             state = Helpers.gridToState(grid);
+
+            System.out.print("KILL, ");
             return new Node(n, Operators.KILL, state, n.depth + 1, 1);
         } else {
             return null;
         }
+
+        
+
     }
 
     public static Node carry(Node node) {
@@ -266,6 +280,7 @@ public class Actions {
 
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.CARRY, state, node.depth + 1, 1);
+        System.out.print("CARRY, ");
         return newNode;
     }
 
@@ -296,7 +311,7 @@ public class Actions {
         ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.DROP, state, node.depth + 1, 1);
-
+        System.out.print("DROP, ");
         return newNode;
     }
 
@@ -326,7 +341,7 @@ public class Actions {
         state = Helpers.gridToState(grid);
         //System.out.println(state);
         Node newNode = new Node(node, Operators.FLY, state, node.depth + 1, 1);
-
+        System.out.print("FLY, ");
         return newNode;
     }
 }
