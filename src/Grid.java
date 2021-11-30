@@ -10,6 +10,8 @@ public class Grid {
     ArrayList<Agent> agents = new ArrayList<Agent>();
     ArrayList<Pad> pads = new ArrayList<Pad>();
 
+    int deaths;
+
     int dimensions;
     int numberOfPills;
     int numberOfHostages;
@@ -49,7 +51,7 @@ public class Grid {
                     hostageY = Helpers.genRandomNumber(0, dimensions - 1);
                 }
                 int damage = Helpers.genRandomNumber(1, 99);
-                Hostage hostage = new Hostage(hostageX, hostageY, damage,false,false);
+                Hostage hostage = new Hostage(hostageX, hostageY, damage,false,false, false);
                 grid[hostageX][hostageY] = hostage;
                 hostages.add(hostage);
             }
