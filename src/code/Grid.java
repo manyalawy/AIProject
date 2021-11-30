@@ -12,6 +12,7 @@ public class Grid {
     ArrayList<Pad> pads = new ArrayList<Pad>();
 
     int deaths;
+    int kills;
 
     int dimensions;
     int numberOfPills;
@@ -24,6 +25,7 @@ public class Grid {
         if(genManually==false) {
             dimensions = Helpers.genRandomNumber(5, 15);
             grid = new Object[dimensions][dimensions];
+            kills = 0;
 
             // Create Neo
             int neoX = Helpers.genRandomNumber(0, dimensions - 1);

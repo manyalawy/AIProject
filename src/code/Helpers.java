@@ -114,6 +114,7 @@ public class Helpers {
         }
 
         grid.deaths = Integer.parseInt(states[8]);
+        grid.kills = Integer.parseInt(states[9]);
 
         return grid;
     }
@@ -137,6 +138,7 @@ public class Helpers {
         newStates.set(7, hostageNewState);
 
         ArrayList x = new ArrayList<String>(newStates);
+        x.add("0");
         x.add("0");
 
         return String.join(";",x);
@@ -179,7 +181,7 @@ public class Helpers {
             Hostage hostage = grid.hostages.get(i);
             result = result + hostage.x + "," + hostage.y + "," + hostage.damage + "," + hostage.carried + ","+ hostage.dropped + "," + hostage.dead;
         }
-        result = result + ";" + grid.deaths;
+        result = result + ";" + grid.deaths + ";" + grid.kills;
 
 
         return result;
