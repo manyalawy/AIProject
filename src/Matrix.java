@@ -139,7 +139,9 @@ public class Matrix extends Search {
 
     public static void main(String[] args) {
 
+
         solve(gridGen(), "BF", false);
+
     
     }
 
