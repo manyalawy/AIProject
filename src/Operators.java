@@ -1,11 +1,11 @@
 public enum Operators {
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT,
-    TAKEPILL,
-    CARRY,
-    DROP,
-    KILL,
-    FLY
+    up,
+    down,
+    right,
+    left,
+    takePill,
+    carry,
+    drop,
+    kill,
+    fly
 }

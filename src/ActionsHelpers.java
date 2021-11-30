@@ -3,7 +3,7 @@ public class ActionsHelpers {
     public static boolean agentExists(Grid grid, Operators operator) {
         int neoX = grid.neo.x;
         int neoY = grid.neo.y;
-        if (operator == Operators.UP) {
+        if (operator == Operators.up) {
             for (int i = 0; i < grid.agents.size(); i++) {
                 Agent a = grid.agents.get(i);
                 if (a.x == neoX - 1 && a.y == neoY) {
@@ -11,7 +11,7 @@ public class ActionsHelpers {
                 }
             }
         }
-        if (operator == Operators.DOWN) {
+        if (operator == Operators.down) {
             for (int i = 0; i < grid.agents.size(); i++) {
                 Agent a = grid.agents.get(i);
                 if (a.x == neoX + 1 && a.y == neoY) {
@@ -19,7 +19,7 @@ public class ActionsHelpers {
                 }
             }
         }
-        if (operator == Operators.LEFT) {
+        if (operator == Operators.left) {
             for (int i = 0; i < grid.agents.size(); i++) {
                 Agent a = grid.agents.get(i);
                 if (a.y == neoY - 1 && a.x == neoX) {
@@ -27,7 +27,7 @@ public class ActionsHelpers {
                 }
             }
         }
-        if (operator == Operators.RIGHT) {
+        if (operator == Operators.right) {
             for (int i = 0; i < grid.agents.size(); i++) {
                 Agent a = grid.agents.get(i);
                 if (a.y == neoY + 1 && a.x == neoX) {
@@ -42,7 +42,7 @@ public class ActionsHelpers {
     public static boolean mutantHostage(Grid grid, Operators operator) {
         int neoX = grid.neo.x;
         int neoY = grid.neo.y;
-        if (operator == Operators.UP) {
+        if (operator == Operators.up) {
             for (int i = 0; i < grid.hostages.size(); i++) {
                 Hostage h = grid.hostages.get(i);
                 if (h.x == neoX - 1 && h.y == neoY && h.damage >= 100 && h.carried == false && h.dropped == false) {
@@ -50,7 +50,7 @@ public class ActionsHelpers {
                 }
             }
         }
-        if (operator == Operators.DOWN) {
+        if (operator == Operators.down) {
             for (int i = 0; i < grid.hostages.size(); i++) {
                 Hostage h = grid.hostages.get(i);
                 if (h.x == neoX + 1 && h.y == neoY && h.damage >= 100 && h.carried == false && h.dropped == false) {
@@ -58,7 +58,7 @@ public class ActionsHelpers {
                 }
             }
         }
-        if (operator == Operators.LEFT) {
+        if (operator == Operators.left) {
             for (int i = 0; i < grid.hostages.size(); i++) {
                 Hostage h = grid.hostages.get(i);
                 if (h.y == neoY + 1 && h.x == neoX && h.damage >= 100 && h.carried == false && h.dropped == false) {
@@ -66,7 +66,7 @@ public class ActionsHelpers {
                 }
             }
         }
-        if (operator == Operators.RIGHT) {
+        if (operator == Operators.right) {
             for (int i = 0; i < grid.hostages.size(); i++) {
                 Hostage h = grid.hostages.get(i);
                 if (h.y == neoY - 1 && h.x == neoX && h.damage >= 100 && h.carried == false && h.dropped == false) {
@@ -140,6 +140,13 @@ public class ActionsHelpers {
 
     public static boolean isHostagesArrayEmpty(Grid grid) {
         return grid.hostages.size() == 0;
+    }
+
+    public static String removeHostagesFromString(String state){
+        String [] states = state.split(";", -1);
+        states [7] = null;
+        state = String.join(";", states);
+        return  state;
     }
 
 }
