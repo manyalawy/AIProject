@@ -6,7 +6,7 @@ public class Actions {
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
 
-        if (node.operator==Operators.DOWN) {
+        if (node.operator==Operators.down) {
             return null;
         }
         if (ActionsHelpers.isNeoDead(grid) == true){
@@ -15,13 +15,15 @@ public class Actions {
         if (neo.x <= 0) {
             return null;
         }
-        if (ActionsHelpers.agentExists(grid, Operators.UP) || ActionsHelpers.mutantHostage(grid, Operators.UP)) {
+        if (ActionsHelpers.agentExists(grid, Operators.up) || ActionsHelpers.mutantHostage(grid, Operators.up)) {
             return null;
         }
         neo.x -= 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.UP, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.up, state, node.depth + 1, 1);
+
+        System.out.print("UP, ");
 
         return newNode;
     }
@@ -31,7 +33,7 @@ public class Actions {
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
 
-        if(node.operator==Operators.UP) {
+        if(node.operator==Operators.up) {
             return null;
         }
         if (ActionsHelpers.isNeoDead(grid) == true)
@@ -39,14 +41,15 @@ public class Actions {
         if (neo.x >= grid.dimensions - 1) {
             return null;
         }
-        if (ActionsHelpers.agentExists(grid, Operators.DOWN) || ActionsHelpers.mutantHostage(grid, Operators.DOWN)) {
+        if (ActionsHelpers.agentExists(grid, Operators.down) || ActionsHelpers.mutantHostage(grid, Operators.down)) {
             return null;
         }
         neo.x += 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.DOWN, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.down, state, node.depth + 1, 1);
 
+        System.out.print("DOWN, ");
         return newNode;
     }
 
@@ -55,7 +58,7 @@ public class Actions {
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
 
-        if(node.operator==Operators.RIGHT){
+        if(node.operator==Operators.right){
             return null;
         }
         if (ActionsHelpers.isNeoDead(grid) == true)
@@ -63,13 +66,15 @@ public class Actions {
         if (neo.y <= 0) {
             return null;
         }
-        if (ActionsHelpers.agentExists(grid, Operators.LEFT) || ActionsHelpers.mutantHostage(grid, Operators.LEFT)) {
+        if (ActionsHelpers.agentExists(grid, Operators.left) || ActionsHelpers.mutantHostage(grid, Operators.left)) {
             return null;
         }
         neo.y -= 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.LEFT, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.left, state, node.depth + 1, 1);
+
+        System.out.print("LEFT, ");
 
         return newNode;
     }
@@ -79,7 +84,7 @@ public class Actions {
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
 
-        if(node.operator==Operators.LEFT) {
+        if(node.operator==Operators.left) {
             return null;
         }
         if (ActionsHelpers.isNeoDead(grid) == true)
@@ -87,13 +92,15 @@ public class Actions {
         if (neo.y >= grid.dimensions - 1) {
             return null;
         }
-        if (ActionsHelpers.agentExists(grid, Operators.RIGHT) || ActionsHelpers.mutantHostage(grid, Operators.RIGHT)) {
+        if (ActionsHelpers.agentExists(grid, Operators.right) || ActionsHelpers.mutantHostage(grid, Operators.right)) {
             return null;
         }
         neo.y += 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.RIGHT, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.right, state, node.depth + 1, 1);
+
+        System.out.print("RIGHT, ");
 
         return newNode;
     }
@@ -101,7 +108,7 @@ public class Actions {
     public static Node takePill(Node node) {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
-        if(node.operator==Operators.TAKEPILL)
+        if(node.operator==Operators.takePill)
             return null;
         if (ActionsHelpers.isNeoDead(grid) == true)
             return null;
@@ -130,7 +137,9 @@ public class Actions {
         }
         state = Helpers.gridToState(grid);
      //   System.out.println(state);
-        Node newNode = new Node(node, Operators.TAKEPILL, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.takePill, state, node.depth + 1, 1);
+
+        System.out.print("PILL, ");
 
         return newNode;
     }
@@ -139,7 +148,7 @@ public class Actions {
 
         String state = n.state;
         Grid grid = Helpers.stateToGrid(state);
-        if(n.operator == Operators.KILL){
+        if(n.operator == Operators.kill){
             return null;
         }
         if (ActionsHelpers.isNeoDead(grid)) {
@@ -228,16 +237,21 @@ public class Actions {
             grid.neo.damage = grid.neo.damage + 20;
             grid = ActionsHelpers.timeStep(grid);
             state = Helpers.gridToState(grid);
-            return new Node(n, Operators.KILL, state, n.depth + 1, 1);
+
+            System.out.print("KILL, ");
+            return new Node(n, Operators.kill, state, n.depth + 1, 1);
         } else {
             return null;
         }
+
+        
+
     }
 
     public static Node carry(Node node) {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
-        if(node.operator == Operators.CARRY){
+        if(node.operator == Operators.carry){
             return null;
         }
         if (ActionsHelpers.isNeoDead(grid) == true)
@@ -265,7 +279,8 @@ public class Actions {
         ActionsHelpers.timeStep(grid);
 
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.CARRY, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.carry, state, node.depth + 1, 1);
+        System.out.print("CARRY, ");
         return newNode;
     }
 
@@ -273,7 +288,7 @@ public class Actions {
 
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
-        if(node.operator==Operators.DROP){
+        if(node.operator==Operators.drop){
             return null;
         }
         if (ActionsHelpers.isNeoDead(grid) == true)
@@ -295,8 +310,8 @@ public class Actions {
 
         ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.DROP, state, node.depth + 1, 1);
-
+        Node newNode = new Node(node, Operators.drop, state, node.depth + 1, 1);
+        System.out.print("DROP, ");
         return newNode;
     }
 
@@ -305,7 +320,7 @@ public class Actions {
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
         Neo neo = grid.neo;
-        if(node.operator==Operators.FLY){
+        if(node.operator==Operators.fly){
             return null;
         }
 
@@ -315,7 +330,7 @@ public class Actions {
         if (grid.grid[grid.neo.x][grid.neo.y] instanceof Pad == false)
             return null;
 
-        if (node.operator == Operators.FLY)
+        if (node.operator == Operators.fly)
             return null;
 
         Pad pad = (Pad) grid.grid[grid.neo.x][grid.neo.y];
@@ -325,8 +340,8 @@ public class Actions {
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         //System.out.println(state);
-        Node newNode = new Node(node, Operators.FLY, state, node.depth + 1, 1);
-
+        Node newNode = new Node(node, Operators.fly, state, node.depth + 1, 1);
+        System.out.print("FLY, ");
         return newNode;
     }
 }

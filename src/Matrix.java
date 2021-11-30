@@ -2,9 +2,13 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
+
 public class Matrix extends Search {
     static Grid grid;
     public HashSet<String> repeatedStates = new HashSet<String>();
+    static int nodesExpandedCount = 0;
+    
 
     public static String gridGen(){
         grid = new Grid(false);
@@ -12,22 +16,27 @@ public class Matrix extends Search {
         String grid1 = Helpers.changeStateFormat("5,5;1;1,4;1,0;0,4;0,0,2,2;3,4,4,2,4,2,3,4;0,2,32,0,1,38");
         String grid2 = Helpers.changeStateFormat("5,5;2;3,2;0,1;4,1;0,3;1,2,4,2,4,2,1,2,0,4,3,0,3,0,0,4;1,1,77,3,4,34");
 
-        return grid2;
+        return grid0;
         
         // return grid.genMatString();
     }
 
-    public static void solve(String grid, String strategy, boolean visualize){
+    public static String solve(String grid, String strategy, boolean visualize){
 
         //  String initialState = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
         // Node parent = new Node(null,null,initialState,0,0);
         Matrix m = new Matrix();
-        String rootState = grid;
+        String rootState = Helpers.changeStateFormat(grid);
         Node root = new Node(null, null, rootState, 0, 0);
         
         Node result = m.search(strategy, root);
         String path = SearchHelpers.getPath(result);
-        System.out.println(path);
+        System.out.println("\n" + "\n" + path);
+        
+        if(result != null)
+            return path;
+        else
+            return "No Solution"; 
         // String result = Search.search(strategy,parent);
         //left,fly,right,carry,left,fly,down,right,drop,left,left,kill,left,left,up,carry,down,down,kill,up,right,right,right,right,drop;1;3;1246837 (plan,deaths,kills,nodes)
     }
@@ -58,6 +67,8 @@ public class Matrix extends Search {
     }
 
     public Node breadthFirst(Node parent){
+        
+
         Queue<Node> bfQueue = new LinkedList<Node>();
         bfQueue.add(parent);
         Node up,down,right,left,takepill,carry,drop,kill,fly =null;
@@ -67,6 +78,8 @@ public class Matrix extends Search {
             }
 
             Node front = bfQueue.remove();
+            nodesExpandedCount++;       
+
             Grid grid = Helpers.stateToGrid(front.state);
             if (ActionsHelpers.reachedTestGoal(grid)==true){
                 return front;
