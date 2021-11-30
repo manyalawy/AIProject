@@ -1,3 +1,4 @@
+package code;
 public class SearchHelpers {
     
     public static String getPath(Node node){

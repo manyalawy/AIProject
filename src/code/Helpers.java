@@ -1,3 +1,4 @@
+package code;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -133,7 +134,7 @@ public class Helpers {
         hostageNewState = hostageNewState.substring(0,hostageNewState.length() - 1);
         newStates.set(7, hostageNewState);
 
-        ArrayList x = new ArrayList<String>(newStates);
+        ArrayList<String> x = new ArrayList<String>(newStates);
         x.add("0");
 
         return String.join(";",x);

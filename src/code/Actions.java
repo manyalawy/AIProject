@@ -1,3 +1,4 @@
+package code;
 public class Actions {
 
 
@@ -302,7 +303,7 @@ public class Actions {
 
         String state = node.state;
         Grid grid = Helpers.stateToGrid(state);
-        Neo neo = grid.neo;
+        // Neo neo = grid.neo;
         if(node.operator==Operators.FLY){
             return null;
         }

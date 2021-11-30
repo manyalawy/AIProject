@@ -1,3 +1,4 @@
+package code;
 public class Agent {
     int x;
     int y;

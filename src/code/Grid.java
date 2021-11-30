@@ -1,3 +1,4 @@
+package code;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -51,7 +52,7 @@ public class Grid {
                     hostageY = Helpers.genRandomNumber(0, dimensions - 1);
                 }
                 int damage = Helpers.genRandomNumber(1, 99);
-                Hostage hostage = new Hostage(hostageX, hostageY, damage,false,false, false);
+                Hostage hostage = new Hostage(hostageX, hostageY, damage,false,false,false);
                 grid[hostageX][hostageY] = hostage;
                 hostages.add(hostage);
             }

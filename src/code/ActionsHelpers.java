@@ -1,4 +1,4 @@
-
+package code;
 public class ActionsHelpers {
     public static boolean agentExists(Grid grid, Operators operator) {
         int neoX = grid.neo.x;
