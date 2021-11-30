@@ -8,18 +8,22 @@ public class Matrix extends Search {
 
     public static String gridGen(){
         grid = new Grid(false);
-        return grid.genMatString();
+        String state = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
+        return state;
+        // return grid.genMatString();
     }
 
     public static void solve(String grid, String strategy, boolean visualize){
 
-        String initialState = Helpers.changeStateFormat(grid);
-        Node parent = new Node(null,null,initialState,0,0);
+        //  String initialState = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
+        // Node parent = new Node(null,null,initialState,0,0);
         Matrix m = new Matrix();
-        String rootState = Helpers.changeStateFormat(grid);
+        String rootState = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
         Node root = new Node(null, null, rootState, 0, 0);
+        
         Node result = m.search(strategy, root);
         String path = SearchHelpers.getPath(result);
+        System.out.println(path);
         // String result = Search.search(strategy,parent);
         //left,fly,right,carry,left,fly,down,right,drop,left,left,kill,left,left,up,carry,down,down,kill,up,right,right,right,right,drop;1;3;1246837 (plan,deaths,kills,nodes)
     }
@@ -43,7 +47,6 @@ public class Matrix extends Search {
                         break;
             case "DF":  goal = depthFirst(root);
                         break;
-        
         }
         //get the path from root to goal node ; deaths; kills; number of nodes
         // return SearchHelpers.getPath(goal);
