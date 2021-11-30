@@ -8,8 +8,12 @@ public class Matrix extends Search {
 
     public static String gridGen(){
         grid = new Grid(false);
-        String state = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
-        return state;
+        String grid0 = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
+        String grid1 = Helpers.changeStateFormat("5,5;1;1,4;1,0;0,4;0,0,2,2;3,4,4,2,4,2,3,4;0,2,32,0,1,38");
+        String grid2 = Helpers.changeStateFormat("5,5;2;3,2;0,1;4,1;0,3;1,2,4,2,4,2,1,2,0,4,3,0,3,0,0,4;1,1,77,3,4,34");
+
+        return grid2;
+        
         // return grid.genMatString();
     }
 

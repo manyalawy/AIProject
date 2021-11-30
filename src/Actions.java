@@ -107,6 +107,7 @@ public class Actions {
             return null;
         if (grid.grid[grid.neo.x][grid.neo.y] instanceof Pill == false)
             return null;
+            
         grid.neo.damage = grid.neo.damage - 20;
         if (grid.neo.damage < 0) {
             grid.neo.damage = 0;
