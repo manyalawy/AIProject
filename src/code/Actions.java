@@ -1,3 +1,4 @@
+package code;
 public class Actions {
 
 
@@ -23,7 +24,6 @@ public class Actions {
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.up, state, node.depth + 1, 1);
 
-        System.out.print("UP, ");
 
         return newNode;
     }
@@ -49,7 +49,6 @@ public class Actions {
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.down, state, node.depth + 1, 1);
 
-        System.out.print("DOWN, ");
         return newNode;
     }
 
@@ -74,7 +73,6 @@ public class Actions {
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.left, state, node.depth + 1, 1);
 
-        System.out.print("LEFT, ");
 
         return newNode;
     }
@@ -100,7 +98,6 @@ public class Actions {
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.right, state, node.depth + 1, 1);
 
-        System.out.print("RIGHT, ");
 
         return newNode;
     }
@@ -137,9 +134,10 @@ public class Actions {
         }
         state = Helpers.gridToState(grid);
      //   System.out.println(state);
+         grid = ActionsHelpers.timeStep(grid);
+
         Node newNode = new Node(node, Operators.takePill, state, node.depth + 1, 1);
 
-        System.out.print("PILL, ");
 
         return newNode;
     }
@@ -238,7 +236,6 @@ public class Actions {
             grid = ActionsHelpers.timeStep(grid);
             state = Helpers.gridToState(grid);
 
-            System.out.print("KILL, ");
             return new Node(n, Operators.kill, state, n.depth + 1, 1);
         } else {
             return null;
@@ -276,11 +273,10 @@ public class Actions {
         grid.neo.numberOfCarriedHostages += 1;
 
 
-        ActionsHelpers.timeStep(grid);
+        grid = ActionsHelpers.timeStep(grid);
 
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.carry, state, node.depth + 1, 1);
-        System.out.print("CARRY, ");
         return newNode;
     }
 
@@ -308,10 +304,9 @@ public class Actions {
         }
         grid.neo.numberOfCarriedHostages = 0;
 
-        ActionsHelpers.timeStep(grid);
+        grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         Node newNode = new Node(node, Operators.drop, state, node.depth + 1, 1);
-        System.out.print("DROP, ");
         return newNode;
     }
 
@@ -341,7 +336,6 @@ public class Actions {
         state = Helpers.gridToState(grid);
         //System.out.println(state);
         Node newNode = new Node(node, Operators.fly, state, node.depth + 1, 1);
-        System.out.print("FLY, ");
         return newNode;
     }
 }

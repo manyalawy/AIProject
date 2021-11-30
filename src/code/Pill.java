@@ -1,3 +1,4 @@
+package code;
 public class Pill {
     int x;
     int y;
