@@ -9,4 +9,15 @@ public enum Operators {
     drop,
     kill,
     fly
+    // fly,
+    // up,
+    // down,
+    // right,
+    // left,
+    // takePill,
+    
+    // drop,
+    // kill,
+    // carry
+    
 }

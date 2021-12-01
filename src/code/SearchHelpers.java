@@ -26,7 +26,7 @@ public class SearchHelpers {
 	        }
         }
 
-        kills = grid.kills + grid.deaths;
+        kills = grid.kills ;
         return pathString + ";" + grid.deaths + ";"+  kills + ";" + Matrix.nodesExpandedCount; //+ numberOfNodes;
     }
 }

@@ -197,6 +197,7 @@ public class Actions {
                     if (hostage.damage >= 100 && hostage.carried == false && hostage.dropped == false) {
                         grid = ActionsHelpers.removeHostage(grid, neoX - 1, neoY);
                         didNeoKill = true;
+                        grid.kills++;
                     }
                 }
             }
@@ -216,6 +217,7 @@ public class Actions {
                     if (hostage.damage >= 100 && hostage.carried == false && hostage.dropped == false) {
                         grid = ActionsHelpers.removeHostage(grid, neoX + 1, neoY);
                         didNeoKill = true;
+                        grid.kills++;
                     }
                 }
             }
@@ -235,6 +237,7 @@ public class Actions {
                     if (hostage.damage >= 100 && hostage.carried == false && hostage.dropped == false) {
                         grid = ActionsHelpers.removeHostage(grid, neoX, neoY + 1);
                         didNeoKill = true;
+                        grid.kills++;
                     }
                 }
             }
@@ -254,6 +257,7 @@ public class Actions {
                     if (hostage.damage >= 100 && hostage.carried == false && hostage.dropped == false) {
                         grid = ActionsHelpers.removeHostage(grid, neoX, neoY - 1);
                         didNeoKill = true;
+                        grid.kills++;
                     }
                 }
             }
