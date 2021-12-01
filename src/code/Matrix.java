@@ -1,7 +1,10 @@
 package code;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
+
+import javax.lang.model.util.ElementScanner14;
 
 
 
@@ -19,7 +22,7 @@ public class Matrix extends Search {
 	    String grid3 = "5,5;1;0,4;4,4;0,3,1,4,2,1,3,0,4,1;4,0;2,4,3,4,3,4,2,4;0,2,98,1,2,98,2,2,98,3,2,98,4,2,98,2,0,1";
 
 
-        return grid3;
+        return grid0;
         
         // return grid.genMatString();
     }
@@ -36,6 +39,9 @@ public class Matrix extends Search {
         String path = SearchHelpers.getPath(result);
         System.out.println("\n" + "\n" + path);
         
+        if(visualize)
+            displayGrid(result);
+
         if(result != null)
             return path;
         else
@@ -44,6 +50,94 @@ public class Matrix extends Search {
         //left,fly,right,carry,left,fly,down,right,drop,left,left,kill,left,left,up,carry,down,down,kill,up,right,right,right,right,drop;1;3;1246837 (plan,deaths,kills,nodes)
     }
 
+    public static void displayGrid(Node goalNode){
+         // Loop through all rows
+        Grid gridClass = Helpers.stateToGrid(goalNode.state);
+        Object [][]grid =gridClass.grid;
+        
+        Object temp;
+        int neoX = gridClass.neo.x;
+        int neoY = gridClass.neo.y;
+        Boolean printNeo;
+        while(goalNode.parent!=null){
+            printNeo = true;
+            gridClass = Helpers.stateToGrid(goalNode.state);
+            grid =gridClass.grid;
+            neoX = gridClass.neo.x;
+            neoY = gridClass.neo.y;
+            
+            for (int i = 0; i < grid.length; i++){
+                for (int j = 0; j < grid[i].length; j++){   // Loop through all elements of current row
+                    //  System.out.print(grid[i][j] + " ");
+                    temp = grid[i][j];
+                    
+                    if(temp instanceof Hostage){
+                        Hostage h = (Hostage)temp;
+                        if(neoX == i && neoY == j && printNeo)
+                        {
+                            printNeo = false;
+                            if(h.damage == 100)
+                                System.out.print("Hostage," + h.damage + ",Neo");  
+                            else if(h.damage <= 10)
+                                System.out.print("Hostage," + h.damage + ",Neo ");
+                            else
+                                System.out.print("Hostage," + h.damage + ",Neo  ");
+                        }
+                    
+                        else
+                        {
+                            if(h.damage >= 10)
+                            System.out.print("Hostage," + h.damage + "     ");  
+                            else
+                            System.out.print("Hostage," + h.damage + "      ");
+                        }
+                    }
+            
+                    if(temp instanceof Agent)
+                    System.out.print("Agent          ");
+                    
+                    if(temp instanceof Pad){
+                        Pad pad = (Pad) temp;
+                        int padX = pad.goesToX;
+                        int padY = pad.goesToY;
+
+                        System.out.print("Pad(" + padX +"," + padY + ")       ");
+                    }                  
+                    
+                    if(temp instanceof Pill && neoX == i && neoY == j && printNeo){
+                        printNeo = false;
+                        System.out.print("Neo,Pill       ");
+                    }
+                    else if(temp instanceof Pill)
+                        System.out.print("Pill           ");
+                    else if(neoX == i && neoY == j && printNeo){
+                        printNeo = false;
+                        System.out.print("  Neo          ");
+                    }              
+
+                    if(temp instanceof TelelphoneBooth && neoX == i && neoY == j && printNeo){
+                        printNeo = false;
+                        System.out.print("Neo,TB         ");
+                    }
+                    else if(temp instanceof TelelphoneBooth)
+                        System.out.print("  TB           ");
+                    else if(neoX == i && neoY == j && printNeo){
+                        printNeo = false;
+                        System.out.print("  Neo          ");
+                    }
+            
+                    if(temp == null )
+                        System.out.print("  .            ");
+                  
+                    
+                }
+                System.out.println();
+            }   
+            System.out.println("-----------------------------------------------------------------------");
+            goalNode = goalNode.parent;
+        }
+    }
+    
 
 
     public boolean repeatedState(String state){
@@ -203,7 +297,7 @@ public class Matrix extends Search {
     public static void main(String[] args) {
 
 
-        solve(gridGen(), "BF", false);
+        solve(gridGen(), "BF", true);
 
     
     }
