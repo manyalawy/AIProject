@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-import javax.lang.model.util.ElementScanner14;
+
 
 
 
@@ -15,14 +15,20 @@ public class Matrix extends Search {
     
 
     public static String gridGen(){
-        grid = new Grid(false);
-        String grid0 = "5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62";
-        String grid1 = "5,5;1;1,4;1,0;0,4;0,0,2,2;3,4,4,2,4,2,3,4;0,2,32,0,1,38";
-	    String grid2 = "5,5;2;3,2;0,1;4,1;0,3;1,2,4,2,4,2,1,2,0,4,3,0,3,0,0,4;1,1,77,3,4,34";
-	    String grid3 = "5,5;1;0,4;4,4;0,3,1,4,2,1,3,0,4,1;4,0;2,4,3,4,3,4,2,4;0,2,98,1,2,98,2,2,98,3,2,98,4,2,98,2,0,1";
+       // grid = new Grid(false);
+       String grid0 = "5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62";
+       String grid1 = "5,5;1;1,4;1,0;0,4;0,0,2,2;3,4,4,2,4,2,3,4;0,2,32,0,1,38";
+       String grid2 = "5,5;2;3,2;0,1;4,1;0,3;1,2,4,2,4,2,1,2,0,4,3,0,3,0,0,4;1,1,77,3,4,34";
+       String grid3 = "5,5;1;0,4;4,4;0,3,1,4,2,1,3,0,4,1;4,0;2,4,3,4,3,4,2,4;0,2,98,1,2,98,2,2,98,3,2,98,4,2,98,2,0,1";
+       String grid4 = "5,5;1;0,4;4,4;0,3,1,4,2,1,3,0,4,1;4,0;2,4,3,4,3,4,2,4;0,2,98,1,2,98,2,2,98,3,2,98,4,2,98,2,0,98,1,0,98";
+       String grid5 = "5,5;2;0,4;3,4;3,1,1,1;2,3;3,0,0,1,0,1,3,0;4,2,54,4,0,85,1,0,43";
+       String grid6 = "5,5;2;3,0;4,3;2,1,2,2,3,1,0,0,1,1,4,2,3,3,1,3,0,1;2,4,3,2,3,4,0,4;4,4,4,0,4,0,4,4;1,4,57,2,0,46";
+       String grid7 = "5,5;3;1,3;4,0;0,1,3,2,4,3,2,4,0,4;3,4,3,0,4,2;1,4,1,2,1,2,1,4,0,3,1,0,1,0,0,3;4,4,45,3,3,12,0,2,88";
+       String grid8 = "5,5;2;4,3;2,1;2,0,0,4,0,3,0,1;3,1,3,2;4,4,3,3,3,3,4,4;4,0,17,1,2,54,0,0,46,4,1,22";
+       String grid9 = "5,5;2;0,4;1,4;0,1,1,1,2,1,3,1,3,3,3,4;1,0,2,4;0,3,4,3,4,3,0,3;0,0,30,3,0,80,4,4,80";
+       String grid10 = "5,5;4;1,1;4,1;2,4,0,4,3,2,3,0,4,2,0,1,1,3,2,1;4,0,4,4,1,0;2,0,0,2,0,2,2,0;0,0,62,4,3,45,3,3,39,2,3,40";
 
-
-        return grid0;
+        return grid2;
         
         // return grid.genMatString();
     }
@@ -198,6 +204,7 @@ public class Matrix extends Search {
                 left=Actions.Left(front);
                 if (left!=null)  
                     bfQueue.add(left);
+
                 takepill=Actions.takePill(front);
                 if (takepill!=null)  
                     bfQueue.add(takepill);
@@ -224,10 +231,10 @@ public class Matrix extends Search {
     public Node depthFirst(Node parent){
         
         Stack<Node> dfStack = new Stack<Node>();
-        dfStack.add(parent);
+        dfStack.push(parent);
         Node up,down,right,left,takepill,carry,drop,kill,fly =null;
         while(true){
-            if (dfStack.isEmpty()){
+            if (dfStack.empty()){
                 return null;            // RETURN NO SOLUTION
             }
 
@@ -241,41 +248,42 @@ public class Matrix extends Search {
 
             //UP,DOWN,RIGHT,LEFT,TAKEPILL,CARRY,DROP,KILL,FLY
             if(!repeatedState(front.state)){
+                fly=Actions.fly(front);
+                if (fly!=null)  
+                    dfStack.push(fly);
+            
                 up= Actions.Up(front);
                 if (up!=null)  
-                    dfStack.add(up);
+                    dfStack.push(up);
 
                 down=Actions.Down(front);
                 if (down!=null)  
-                    dfStack.add(down);
+                    dfStack.push(down);
 
                 right=Actions.Right(front);
                 if (right!=null)  
-                    dfStack.add(right);
+                    dfStack.push(right);
 
                 left=Actions.Left(front);
                 if (left!=null)  
-                    dfStack.add(left);
+                    dfStack.push(left);
 
                 takepill=Actions.takePill(front);
                 if (takepill!=null)  
-                    dfStack.add(takepill);
+                    dfStack.push(takepill);
 
-                carry=Actions.carry(front);
-                if (carry!=null)  
-                    dfStack.add(carry); 
-                
                 drop=Actions.drop(front);
                 if (drop!=null)  
-                    dfStack.add(drop);
+                    dfStack.push(drop);
             
                 kill=Actions.kill(front);    
                 if (kill!=null)  
-                    dfStack.add(kill);
+                    dfStack.push(kill);
 
-                fly=Actions.fly(front);
-                if (fly!=null)  
-                    dfStack.add(fly);
+                carry=Actions.carry(front);
+                if (carry!=null)  
+                    dfStack.push(carry); 
+                
             }
         }
     }
@@ -297,7 +305,7 @@ public class Matrix extends Search {
     public static void main(String[] args) {
 
 
-        solve(gridGen(), "BF", true);
+        solve(gridGen(), "DF", false);
 
     
     }
