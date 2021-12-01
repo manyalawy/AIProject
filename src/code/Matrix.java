@@ -11,7 +11,7 @@ public class Matrix extends Search {
     static int nodesExpandedCount = 0;
     
 
-    public static String gridGen(){
+    public static Grid gridGen(){
         grid = new Grid(false);
         String grid0 = "5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62";
         String grid1 = "5,5;1;1,4;1,0;0,4;0,0,2,2;3,4,4,2,4,2,3,4;0,2,32,0,1,38";
@@ -19,7 +19,7 @@ public class Matrix extends Search {
 	    String grid3 = "5,5;1;0,4;4,4;0,3,1,4,2,1,3,0,4,1;4,0;2,4,3,4,3,4,2,4;0,2,98,1,2,98,2,2,98,3,2,98,4,2,98,2,0,1";
 
 
-        return grid3;
+        return grid;
         
         // return grid.genMatString();
     }
@@ -203,7 +203,7 @@ public class Matrix extends Search {
     public static void main(String[] args) {
 
 
-        solve(gridGen(), "BF", false);
+        solve("5,5;2;0,4;1,4;0,1,1,1,2,1,3,1,3,3,3,4;1,0,2,4;0,3,4,3,4,3,0,3;0,0,30,3,0,80,4,4,80", "BF", false);
 
     
     }

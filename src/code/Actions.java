@@ -19,6 +19,11 @@ public class Actions {
         if (ActionsHelpers.agentExists(grid, Operators.up) || ActionsHelpers.mutantHostage(grid, Operators.up)) {
             return null;
         }
+        if(grid.grid[neo.x-1][neo.y] instanceof Hostage){
+            Hostage h = (Hostage) grid.grid[neo.x-1][neo.y];
+            if(h.damage>=98)
+                return null;
+        }
         neo.x -= 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
@@ -44,6 +49,11 @@ public class Actions {
         if (ActionsHelpers.agentExists(grid, Operators.down) || ActionsHelpers.mutantHostage(grid, Operators.down)) {
             return null;
         }
+        if(grid.grid[neo.x+1][neo.y] instanceof Hostage){
+            Hostage h = (Hostage) grid.grid[neo.x+1][neo.y];
+            if(h.damage>=98)
+                return null;
+        }
         neo.x += 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
@@ -67,6 +77,11 @@ public class Actions {
         }
         if (ActionsHelpers.agentExists(grid, Operators.left) || ActionsHelpers.mutantHostage(grid, Operators.left)) {
             return null;
+        }
+        if(grid.grid[neo.x][neo.y-1] instanceof Hostage){
+            Hostage h = (Hostage) grid.grid[neo.x][neo.y-1];
+            if(h.damage>=98)
+                return null;
         }
         neo.y -= 1;
         grid = ActionsHelpers.timeStep(grid);
@@ -92,6 +107,11 @@ public class Actions {
         }
         if (ActionsHelpers.agentExists(grid, Operators.right) || ActionsHelpers.mutantHostage(grid, Operators.right)) {
             return null;
+        }
+        if(grid.grid[neo.x][neo.y+1] instanceof Hostage){
+            Hostage h = (Hostage) grid.grid[neo.x][neo.y+1];
+            if(h.damage>=98)
+                return null;
         }
         neo.y += 1;
         grid = ActionsHelpers.timeStep(grid);
@@ -151,6 +171,11 @@ public class Actions {
         }
         if (ActionsHelpers.isNeoDead(grid)) {
             return null;
+        }
+        if(grid.grid[grid.neo.x][grid.neo.y] instanceof Hostage){
+            Hostage h = (Hostage) grid.grid[grid.neo.x][grid.neo.y];
+            if(h.damage>=98)
+                return null;
         }
 
         boolean didNeoKill = false;
