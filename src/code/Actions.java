@@ -27,7 +27,7 @@ public class Actions {
         neo.x -= 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.up, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.up, state, node.depth + 1);
 
 
         return newNode;
@@ -57,7 +57,7 @@ public class Actions {
         neo.x += 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.down, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.down, state, node.depth + 1);
 
         return newNode;
     }
@@ -86,7 +86,7 @@ public class Actions {
         neo.y -= 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.left, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.left, state, node.depth + 1);
 
 
         return newNode;
@@ -116,7 +116,7 @@ public class Actions {
         neo.y += 1;
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.right, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.right, state, node.depth + 1);
 
 
         return newNode;
@@ -156,7 +156,7 @@ public class Actions {
      //   System.out.println(state);
          grid = ActionsHelpers.timeStep(grid);
 
-        Node newNode = new Node(node, Operators.takePill, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.takePill, state, node.depth + 1);
 
 
         return newNode;
@@ -269,7 +269,7 @@ public class Actions {
             grid = ActionsHelpers.timeStep(grid);
             state = Helpers.gridToState(grid);
 
-            return new Node(n, Operators.kill, state, n.depth + 1, 1);
+            return new Node(n, Operators.kill, state, n.depth + 1);
         } else {
             return null;
         }
@@ -309,7 +309,7 @@ public class Actions {
         grid = ActionsHelpers.timeStep(grid);
 
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.carry, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.carry, state, node.depth + 1);
         return newNode;
     }
 
@@ -333,13 +333,14 @@ public class Actions {
             if (grid.hostages.get(i).carried) {
                 grid.hostages.get(i).dropped = true;    // Set dropped to TRUE
                 grid.hostages.remove(i);
+                i--;
             }
         }
         grid.neo.numberOfCarriedHostages = 0;
 
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
-        Node newNode = new Node(node, Operators.drop, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.drop, state, node.depth + 1);
         return newNode;
     }
 
@@ -368,7 +369,7 @@ public class Actions {
         grid = ActionsHelpers.timeStep(grid);
         state = Helpers.gridToState(grid);
         //System.out.println(state);
-        Node newNode = new Node(node, Operators.fly, state, node.depth + 1, 1);
+        Node newNode = new Node(node, Operators.fly, state, node.depth + 1);
         return newNode;
     }
 }

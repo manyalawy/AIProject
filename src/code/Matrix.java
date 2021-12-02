@@ -1,8 +1,5 @@
 package code;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 
 public class Matrix extends Search {
@@ -36,7 +33,7 @@ public class Matrix extends Search {
         // Node parent = new Node(null,null,initialState,0,0);
         Matrix m = new Matrix();
         String rootState = Helpers.changeStateFormat(grid);
-        Node root = new Node(null, null, rootState, 0, 0);
+        Node root = new Node(null, null, rootState, 0);
         
         Node result = m.search(strategy, root);
         String path = SearchHelpers.getPath(result);
@@ -162,6 +159,8 @@ public class Matrix extends Search {
                         break;
             case "ID":  goal = iterativeDepth(root);
             			break;
+            case "UC":  goal = uniformCost(root);
+                break;
         }
         //get the path from root to goal node ; deaths; kills; number of nodes
         // return SearchHelpers.getPath(goal);
@@ -172,16 +171,18 @@ public class Matrix extends Search {
         Queue<Node> bfQueue = new LinkedList<Node>();
         bfQueue.add(parent);
         Node up,down,right,left,takepill,carry,drop,kill,fly =null;
+        Node front;
+        Grid grid;
         while(true){
             if (bfQueue.isEmpty()){
                 return null;            // RETURN NO SOLUTION
             }
 
-            Node front = bfQueue.remove();
+            front = bfQueue.remove();
             nodesExpandedCount++;     
             System.out.print(front.operator + ", ");  
 
-            Grid grid = Helpers.stateToGrid(front.state);
+            grid = Helpers.stateToGrid(front.state);
             if (ActionsHelpers.reachedTestGoal(grid)==true){
                 return front;
             }
@@ -353,6 +354,66 @@ public class Matrix extends Search {
             }
         }
     }
+
+    public Node uniformCost(Node parent){
+        ArrayList<Node> arr = new ArrayList<>();
+        arr.add(parent);
+        Node up,down,right,left,takepill,carry,drop,kill,fly =null;
+        while(true){
+            if (arr.isEmpty()){
+                return null;            // RETURN NO SOLUTION
+            }
+
+            Node front = arr.remove(0);
+            nodesExpandedCount++;
+
+            Grid grid = Helpers.stateToGrid(front.state);
+            if (ActionsHelpers.reachedTestGoal(grid)==true){
+                return front;
+            }
+
+            //UP,DOWN,RIGHT,LEFT,TAKEPILL,CARRY,DROP,KILL,FLY
+            if(!repeatedState(front.state)){
+                fly=Actions.fly(front);
+                if (fly!=null)
+                    arr.add(fly);
+
+                up= Actions.Up(front);
+                if (up!=null)
+                    arr.add(up);
+
+                down=Actions.Down(front);
+                if (down!=null)
+                    arr.add(down);
+
+                right=Actions.Right(front);
+                if (right!=null)
+                    arr.add(right);
+
+                left=Actions.Left(front);
+                if (left!=null)
+                    arr.add(left);
+
+                takepill=Actions.takePill(front);
+                if (takepill!=null)
+                    arr.add(takepill);
+
+                drop=Actions.drop(front);
+                if (drop!=null)
+                    arr.add(drop);
+
+                kill=Actions.kill(front);
+                if (kill!=null)
+                    arr.add(kill);
+
+                carry=Actions.carry(front);
+                if (carry!=null)
+                    arr.add(carry);
+
+            }
+            Collections.sort(arr);
+        }
+    }
     @Override
     public boolean goalTest() {
         // TODO Auto-generated method stub
@@ -369,8 +430,18 @@ public class Matrix extends Search {
     public static void main(String[] args) {
 
 
-        solve(gridGen(), "DF", false);
-
+//        solve(gridGen(), "DF", false);
+        ArrayList<Node> nodes = new ArrayList();
+        String state = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
+        System.out.println(state);
+        Node a = new Node(null,Operators.down,"5,5;2;3,4,0,0;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,false,false,false,2,4,62,false,false,false;0;0",0);
+        Node b = new Node(null,Operators.down,"5,5;2;3,4,0,0;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,false,false,false,2,4,62,false,false,false;5;5",10);
+        nodes.add(b);
+        nodes.add(a);
+        Collections.sort(nodes);
+        for (int i = 0; i < nodes.size(); i++) {
+            System.out.println(nodes.get(i).pathCost);
+        }
     
     }
 
