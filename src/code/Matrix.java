@@ -171,16 +171,18 @@ public class Matrix extends Search {
         Queue<Node> bfQueue = new LinkedList<Node>();
         bfQueue.add(parent);
         Node up,down,right,left,takepill,carry,drop,kill,fly =null;
+        Node front;
+        Grid grid;
         while(true){
             if (bfQueue.isEmpty()){
                 return null;            // RETURN NO SOLUTION
             }
 
-            Node front = bfQueue.remove();
+            front = bfQueue.remove();
             nodesExpandedCount++;     
             System.out.print(front.operator + ", ");  
 
-            Grid grid = Helpers.stateToGrid(front.state);
+            grid = Helpers.stateToGrid(front.state);
             if (ActionsHelpers.reachedTestGoal(grid)==true){
                 return front;
             }

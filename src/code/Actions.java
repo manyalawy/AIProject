@@ -333,6 +333,7 @@ public class Actions {
             if (grid.hostages.get(i).carried) {
                 grid.hostages.get(i).dropped = true;    // Set dropped to TRUE
                 grid.hostages.remove(i);
+                i--;
             }
         }
         grid.neo.numberOfCarriedHostages = 0;
