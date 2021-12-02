@@ -165,7 +165,7 @@ public class Matrix extends Search {
                 break;
             case "GR2": goal = greedy(root, "2");
                 break;
-            case "AS1": goal = astar(root, "a");
+            case "AS1": goal = astar(root, "1");
                 break;
             case "AS2": goal = astar(root, "2");
                 break;
