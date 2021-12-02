@@ -161,10 +161,110 @@ public class Matrix extends Search {
             			break;
             case "UC":  goal = uniformCost(root);
                 break;
+            case "GR1": goal = greedy(root,"1");
+                break;
+            case "GR2": goal = greedy(root, "2");
+                break;
+            case "AS1": goal = astar(root, "a");
+                break;
+            case "AS2": goal = astar(root, "2");
+                break;
         }
         //get the path from root to goal node ; deaths; kills; number of nodes
         // return SearchHelpers.getPath(goal);
         return goal;
+    }
+
+    public Node astar(Node parent, String heurisic) {
+        ArrayList<Node> arr = new ArrayList<>();
+        arr.add(parent);
+        Node up,down,right,left,takepill,carry,drop,kill,fly =null;
+        while(true) {
+            if (arr.isEmpty()) {
+                return null;            // RETURN NO SOLUTION
+            }
+
+            Node front = arr.remove(0);
+            nodesExpandedCount++;
+
+            Grid grid = Helpers.stateToGrid(front.state);
+            if (ActionsHelpers.reachedTestGoal(grid) == true) {
+                return front;
+            }
+
+            //UP,DOWN,RIGHT,LEFT,TAKEPILL,CARRY,DROP,KILL,FLY
+            if (!repeatedState(front.state)) {
+                fly = Actions.fly(front);
+                if (fly != null)
+                    arr.add(fly);
+
+                up = Actions.Up(front);
+                if (up != null)
+                    arr.add(up);
+
+                down = Actions.Down(front);
+                if (down != null)
+                    arr.add(down);
+
+                right = Actions.Right(front);
+                if (right != null)
+                    arr.add(right);
+
+                left = Actions.Left(front);
+                if (left != null)
+                    arr.add(left);
+
+                takepill = Actions.takePill(front);
+                if (takepill != null)
+                    arr.add(takepill);
+
+                drop = Actions.drop(front);
+                if (drop != null)
+                    arr.add(drop);
+
+                kill = Actions.kill(front);
+                if (kill != null)
+                    arr.add(kill);
+
+                carry = Actions.carry(front);
+                if (carry != null)
+                    arr.add(carry);
+
+            }
+            if (heurisic == "1") {
+                Collections.sort(arr, new Comparator<Node>() {
+                    @Override
+                    public int compare(Node o1, Node o2) {
+                        int heuristic1 = o1.heuristic1 + o1.pathCost;
+                        int heuristic2  = o2.heuristic1 + o2.pathCost;
+                        if (heuristic1 > heuristic2) {
+                            return 1;
+                        }
+                        if (heuristic1 < heuristic2) {
+                            return -1;
+                        }
+                        return 0;
+                    }
+                });
+            }
+
+            if (heurisic == "2") {
+                Collections.sort(arr, new Comparator<Node>() {
+                    @Override
+                    public int compare(Node o1, Node o2) {
+                        int heuristic1 = o1.heuristic2 + o1.pathCost;
+                        int heuristic2  = o2.heuristic2 + o2.pathCost;
+                        if (heuristic1> heuristic2) {
+                            return 1;
+                        }
+                        if (heuristic1< heuristic2) {
+                            return -1;
+                        }
+                        return 0;
+                    }
+                });
+            }
+        }
     }
 
     public Node breadthFirst(Node parent){
@@ -412,6 +512,94 @@ public class Matrix extends Search {
             Collections.sort(arr);
         }
     }
+
+    public Node greedy(Node parent, String heurisic){
+        ArrayList<Node> arr = new ArrayList<>();
+        arr.add(parent);
+        Node up,down,right,left,takepill,carry,drop,kill,fly =null;
+        while(true) {
+            if (arr.isEmpty()) {
+                return null;            // RETURN NO SOLUTION
+            }
+
+            Node front = arr.remove(0);
+            nodesExpandedCount++;
+
+            Grid grid = Helpers.stateToGrid(front.state);
+            if (ActionsHelpers.reachedTestGoal(grid) == true) {
+                return front;
+            }
+
+            //UP,DOWN,RIGHT,LEFT,TAKEPILL,CARRY,DROP,KILL,FLY
+            if (!repeatedState(front.state)) {
+                fly = Actions.fly(front);
+                if (fly != null)
+                    arr.add(fly);
+
+                up = Actions.Up(front);
+                if (up != null)
+                    arr.add(up);
+
+                down = Actions.Down(front);
+                if (down != null)
+                    arr.add(down);
+
+                right = Actions.Right(front);
+                if (right != null)
+                    arr.add(right);
+
+                left = Actions.Left(front);
+                if (left != null)
+                    arr.add(left);
+
+                takepill = Actions.takePill(front);
+                if (takepill != null)
+                    arr.add(takepill);
+
+                drop = Actions.drop(front);
+                if (drop != null)
+                    arr.add(drop);
+
+                kill = Actions.kill(front);
+                if (kill != null)
+                    arr.add(kill);
+
+                carry = Actions.carry(front);
+                if (carry != null)
+                    arr.add(carry);
+
+            }
+            if (heurisic == "1") {
+                Collections.sort(arr, new Comparator<Node>() {
+                    @Override
+                    public int compare(Node o1, Node o2) {
+                        if (o1.heuristic1 > o2.heuristic1) {
+                            return 1;
+                        }
+                        if (o1.heuristic1 < o2.heuristic1) {
+                            return -1;
+                        }
+                        return 0;
+                    }
+                });
+            }
+
+            if (heurisic == "2") {
+                Collections.sort(arr, new Comparator<Node>() {
+                    @Override
+                    public int compare(Node o1, Node o2) {
+                        if (o1.heuristic2 > o2.heuristic2) {
+                            return 1;
+                        }
+                        if (o1.heuristic2 < o2.heuristic2) {
+                            return -1;
+                        }
+                        return 0;
+                    }
+                });
+            }
+        }
+    }
     @Override
     public boolean goalTest() {
         // TODO Auto-generated method stub
@@ -424,11 +612,10 @@ public class Matrix extends Search {
         return 0;
     }
 
-
     public static void main(String[] args) {
 
 
-//        solve(gridGen(), "DF", false);
+        solve(gridGen(), "DF", false);
         ArrayList<Node> nodes = new ArrayList();
         String state = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
         System.out.println(state);
@@ -436,10 +623,23 @@ public class Matrix extends Search {
         Node b = new Node(null,Operators.down,"5,5;2;3,4,0,0;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,false,false,false,2,4,62,false,false,false;5;5",10);
         nodes.add(b);
         nodes.add(a);
-        Collections.sort(nodes);
+        Collections.sort(nodes, new Comparator<Node>(){
+            @Override
+            public int compare(Node o1, Node o2) {
+                if(o1.heuristic1 > o2.heuristic1){
+                    return 1;
+                }
+                if(o1.heuristic1 < o2.heuristic1){
+                    return -1;
+                }
+                return 0;
+            }
+        });
+
         for (int i = 0; i < nodes.size(); i++) {
-            System.out.println(nodes.get(i).pathCost);
+            System.out.println(nodes.get(i).heuristic1);
         }
+
     
     }
 
