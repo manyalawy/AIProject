@@ -298,7 +298,7 @@ public class Actions {
             return null;
 
         for (int i = 0; i < grid.hostages.size(); i++) {
-            if (grid.hostages.get(i) == hostage) {
+            if (grid.hostages.get(i).x == hostage.x && grid.hostages.get(i).y == hostage.y ) {
                 grid.hostages.get(i).carried = true;
                 break;
             }

@@ -38,7 +38,7 @@ public class Matrix extends Search {
         Node result = m.search(strategy, root);
         String path = SearchHelpers.getPath(result);
         System.out.println("\n" + "\n" + path);
-        
+
         if(visualize)
             displayGrid(result);
 
@@ -289,6 +289,11 @@ public class Matrix extends Search {
 
             //UP,DOWN,RIGHT,LEFT,TAKEPILL,CARRY,DROP,KILL,FLY
             if(!repeatedState(front.state)){
+
+                carry=Actions.carry(front);
+                if (carry!=null)
+                    bfQueue.add(carry);
+
                 up= Actions.Up(front);
                 if (up!=null)  
                     bfQueue.add(up);
@@ -308,10 +313,6 @@ public class Matrix extends Search {
                 takepill=Actions.takePill(front);
                 if (takepill!=null)  
                     bfQueue.add(takepill);
-
-                carry=Actions.carry(front);
-                if (carry!=null)  
-                    bfQueue.add(carry); 
                 
                 drop=Actions.drop(front);
                 if (drop!=null)  
@@ -349,40 +350,40 @@ public class Matrix extends Search {
             //UP,DOWN,RIGHT,LEFT,TAKEPILL,CARRY,DROP,KILL,FLY
             if(!repeatedState(front.state)){
                 fly=Actions.fly(front);
-                if (fly!=null)  
+                if (fly!=null)
                     dfStack.push(fly);
-            
+
+                carry=Actions.carry(front);
+                if (carry!=null)
+                    dfStack.push(carry);
+
+                kill=Actions.kill(front);
+                if (kill!=null)
+                    dfStack.push(kill);
+
+                drop=Actions.drop(front);
+                if (drop!=null)
+                    dfStack.push(drop);
+
                 up= Actions.Up(front);
-                if (up!=null)  
+                if (up!=null)
                     dfStack.push(up);
 
                 down=Actions.Down(front);
-                if (down!=null)  
+                if (down!=null)
                     dfStack.push(down);
 
                 right=Actions.Right(front);
-                if (right!=null)  
+                if (right!=null)
                     dfStack.push(right);
 
                 left=Actions.Left(front);
-                if (left!=null)  
+                if (left!=null)
                     dfStack.push(left);
 
                 takepill=Actions.takePill(front);
-                if (takepill!=null)  
+                if (takepill!=null)
                     dfStack.push(takepill);
-
-                drop=Actions.drop(front);
-                if (drop!=null)  
-                    dfStack.push(drop);
-            
-                kill=Actions.kill(front);    
-                if (kill!=null)  
-                    dfStack.push(kill);
-
-                carry=Actions.carry(front);
-                if (carry!=null)  
-                    dfStack.push(carry); 
                 
             }
         }
@@ -478,6 +479,18 @@ public class Matrix extends Search {
                 if (fly!=null)
                     arr.add(fly);
 
+                carry=Actions.carry(front);
+                if (carry!=null)
+                    arr.add(carry);
+
+                kill=Actions.kill(front);
+                if (kill!=null)
+                    arr.add(kill);
+
+                drop=Actions.drop(front);
+                if (drop!=null)
+                    arr.add(drop);
+
                 up= Actions.Up(front);
                 if (up!=null)
                     arr.add(up);
@@ -497,19 +510,6 @@ public class Matrix extends Search {
                 takepill=Actions.takePill(front);
                 if (takepill!=null)
                     arr.add(takepill);
-
-                drop=Actions.drop(front);
-                if (drop!=null)
-                    arr.add(drop);
-
-                kill=Actions.kill(front);
-                if (kill!=null)
-                    arr.add(kill);
-
-                carry=Actions.carry(front);
-                if (carry!=null)
-                    arr.add(carry);
-
             }
             Collections.sort(arr);
         }
@@ -534,41 +534,41 @@ public class Matrix extends Search {
 
             //UP,DOWN,RIGHT,LEFT,TAKEPILL,CARRY,DROP,KILL,FLY
             if (!repeatedState(front.state)) {
-                fly = Actions.fly(front);
-                if (fly != null)
+                fly=Actions.fly(front);
+                if (fly!=null)
                     arr.add(fly);
 
-                up = Actions.Up(front);
-                if (up != null)
-                    arr.add(up);
+                carry=Actions.carry(front);
+                if (carry!=null)
+                    arr.add(carry);
 
-                down = Actions.Down(front);
-                if (down != null)
-                    arr.add(down);
-
-                right = Actions.Right(front);
-                if (right != null)
-                    arr.add(right);
-
-                left = Actions.Left(front);
-                if (left != null)
-                    arr.add(left);
-
-                takepill = Actions.takePill(front);
-                if (takepill != null)
-                    arr.add(takepill);
-
-                drop = Actions.drop(front);
-                if (drop != null)
-                    arr.add(drop);
-
-                kill = Actions.kill(front);
-                if (kill != null)
+                kill=Actions.kill(front);
+                if (kill!=null)
                     arr.add(kill);
 
-                carry = Actions.carry(front);
-                if (carry != null)
-                    arr.add(carry);
+                drop=Actions.drop(front);
+                if (drop!=null)
+                    arr.add(drop);
+
+                up= Actions.Up(front);
+                if (up!=null)
+                    arr.add(up);
+
+                down=Actions.Down(front);
+                if (down!=null)
+                    arr.add(down);
+
+                right=Actions.Right(front);
+                if (right!=null)
+                    arr.add(right);
+
+                left=Actions.Left(front);
+                if (left!=null)
+                    arr.add(left);
+
+                takepill=Actions.takePill(front);
+                if (takepill!=null)
+                    arr.add(takepill);
 
             }
             if (heurisic == "1") {
@@ -617,30 +617,8 @@ public class Matrix extends Search {
     public static void main(String[] args) {
 
 
-        solve(gridGen(), "DF", false);
-        ArrayList<Node> nodes = new ArrayList();
-        String state = Helpers.changeStateFormat("5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62");
-        System.out.println(state);
-        Node a = new Node(null,Operators.down,"5,5;2;3,4,0,0;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,false,false,false,2,4,62,false,false,false;0;0",0);
-        Node b = new Node(null,Operators.down,"5,5;2;3,4,0,0;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,false,false,false,2,4,62,false,false,false;5;5",10);
-        nodes.add(b);
-        nodes.add(a);
-        Collections.sort(nodes, new Comparator<Node>(){
-            @Override
-            public int compare(Node o1, Node o2) {
-                if(o1.heuristic1 > o2.heuristic1){
-                    return 1;
-                }
-                if(o1.heuristic1 < o2.heuristic1){
-                    return -1;
-                }
-                return 0;
-            }
-        });
+        solve("5,5;2;0,4;1,4;0,1,1,1,2,1,3,1,3,3,3,4;1,0,2,4;0,3,4,3,4,3,0,3;0,0,30,3,0,80,4,4,80", "BF", false);
 
-        for (int i = 0; i < nodes.size(); i++) {
-            System.out.println(nodes.get(i).heuristic1);
-        }
 
     
     }
